@@ -16,7 +16,8 @@
   }
 
   .bg-dark {
-    @apply bg-slate-900;
+    background-color: rgba(58, 58, 58, 1);
+    /* @apply bg-slate-900; */
   }
 
   

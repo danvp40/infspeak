@@ -80,3 +80,7 @@ export const getAsset = (path: string): string =>
 
 /** */
 const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
+
+export const isCurrentPath = (path: string, toCheck: string): boolean => {
+  return path.replace(/\/$/, "") == toCheck.replace(/\/$/, "");
+}
