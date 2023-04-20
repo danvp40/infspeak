@@ -3,9 +3,9 @@ import defaultImage from './assets/images/default.png';
 const CONFIG = {
   name: 'AstroWind',
 
-  origin: 'https://astrowind.vercel.app',
-  basePathname: '/',
-  trailingSlash: false,
+  origin: 'https://danvp40.github.io/',
+  basePathname: '/infspeak/',
+  trailingSlash: false, 
 
   title: 'AstroWind — Free template for create a website with Astro + Tailwind CSS',
   description:
