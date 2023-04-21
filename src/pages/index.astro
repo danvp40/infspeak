@@ -1,6 +1,7 @@
 ---
 import { SITE } from '~/config.mjs';
 import Layout from '~/layouts/PageLayout.astro';
+
 import { Icon } from 'astro-icon';
 
 import Hero from '~/components/widgets/Hero.astro';
@@ -18,101 +19,115 @@ const meta = {
   description: SITE.description,
   dontUseTitleTemplate: true,
 };
+
+const services = [
+  {
+    key: 'management',
+    icon: getAsset('/assets/home-services/icon1.png'),
+    image: getAsset('/assets/home-services/service1.png'),
+    label: 'Management Reporting Service',
+    header: 'Discover comprehensive financial and non-financial Measures driving business profitability',
+    salepoints: [
+      'Find the best key indicators for every functional enterprise resource',
+      'Build up Server, Backend Pipeline, Integrate BI Reports',
+      'Customized full package of Management Reports',
+    ],
+    action: {
+      label: 'Learn more',
+      href: '#',
+    },
+  },
+
+  {
+    key: 'sales',
+    icon: getAsset('/assets/home-services/icon2.png'),
+    image: getAsset('/assets/home-services/service2.png'),
+    label: 'Sales Analytics Dashboard',
+    header: 'Discover how Sales Drivers leading to Growth in the Strategic perspective',
+    salepoints: [
+      'Find the best key indicators for Sales analytics',
+      'Build up Data capture, ETL pipeline, Data model',
+      'Provide Financial Ratios, Measures, Indicators give managerial information',
+      'Optimize sales by detecting economics of scale',
+    ],
+  },
+  {
+    key: 'cost',
+    icon: getAsset('/assets/home-services/icon3.png'),
+    image: getAsset('/assets/home-services/service3.png'),
+    label: 'Cost Analytics Dashboard',
+    header: 'Discover how Most efﬁcient Cost Factors indicating in Value Chain for competitive advantage ﬁndings',
+    salepoints: [
+      'Find the best key indicators for Cost analytics',
+      'Build up Data capture, ETL pipeline, Data model',
+      'Provide Financial Ratios, Measures, Indicators give managerial information',
+      'Optimize Costs by detecting Experience Curve',
+    ],
+  },
+  {
+    key: 'pnl',
+    icon: getAsset('/assets/home-services/icon4.png'),
+    image: getAsset('/assets/home-services/service4.png'),
+    label: 'P&L Analytics Dashboard',
+    header: 'Discover how Value-based Drivers leading Growth in Experience Curve learning',
+    salepoints: [
+      'Find the best key indicators for P&L analytics',
+      'Build up Data capture, ETL pipeline, Data model',
+      'Provide Financial Ratios, Measures, Indicators give managerial information',
+      'Maximize Proﬁtability by detecting Optimal Points',
+    ],
+  },
+  {
+    key: 'performance',
+    icon: getAsset('/assets/home-services/icon5.png'),
+    image: getAsset('/assets/home-services/service5.png'),
+    label: 'Performance Dashboard',
+    header: 'Discover how Valued-Based Findings on possibly Correlated Drivers',
+    salepoints: [
+      'Find the best key indicators for Performance analytics',
+      'Build up Data capture, ETL pipeline, Data model',
+      'Provide Financial Ratios, Measures, Indicators give managerial information',
+      'Optimize Enterprise value by Earned Value Analysis',
+    ],
+  },
+  {
+    key: 'budget',
+    icon: getAsset('/assets/home-services/icon6.png'),
+    image: getAsset('/assets/home-services/service6.png'),
+    label: 'Budget & Planning Service',
+    header: 'Develop value drivers on possibly leverage proﬁtability through modeling and what-if analysis',
+    salepoints: [
+      'Deﬁning budget objectives, accessing historical and actual data to develop, prepare, review and reﬁne a budget reporting',
+      'Build up Data capture, ETL pipeline, Data model',
+      'Provide Financial Ratios, Measures, Indicators give managerial information',
+      'Monitor budget by Intergrate BI Reports',
+    ],
+  },
+];
 ---
 
 <Layout {meta}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    callToAction={{ text: 'Get template', href: 'https://github.com/onwidget/astrowind', icon: 'tabler:download' }}
-    callToAction2={{ text: 'Learn more', href: '#features' }}
-    image={{ src: import('~/assets/images/hero.png'), alt: 'AstroWind Hero Image' }}
-  >
-    <Fragment slot="title">
-      Free template for <span class="hidden lg:inline">create your website <br class="2xl:hidden" /> with</span>
-      <span class="text-accent dark:text-white highlight"> Astro 2.0</span> + Tailwind CSS
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 2.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span> Suitable for Startups,
-      Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs.
-    </Fragment>
-  </Hero>
-
-  <!-- https://tailwindflex.com/brandon/carousel-with-tailwind-css-and-alpinejs -->
-  <section class="relative">
+  <section class="relative pt-4">
     <div class="max-w-6xl mx-auto">
-      <div class="h-[800px] flex flex-col">
-        <div
-          class="w-full relative overflow-hidden"
-          x-data={`{ activeSlide: 0, timer: null, timeout: 5000, slides: ${JSON.stringify(
-            [0, 1, 2].map((i) => getAsset('/assets/home-slider/Banner-' + i + '.png'))
-          )},
-        next(){
-          this.ltr = false;
-          this.activeSlide = this.activeSlide === (this.slides.length - 1) ? 0 : this.activeSlide + 1; 
-          this.resetTimer();
-        } ,
-        prev(){
-          this.ltr = true;
-          this.activeSlide = this.activeSlide === 0 ? this.slides.length -1 : this.activeSlide - 1; 
-      },
-      resetTimer(){clearTimeout(this.timer); this.timer = setTimeout(()=>{this.next()}, this.timeout)},
-      enter: "translate-x-full",
-      leave: "-translate-x-full",
-      ltr: true,
-      transition: {
-        'x-transition:enter': "absolute left-0 top-0 transition transform duration-700",
-              'x-transition:enter-start'(){ return this.ltr ? "-translate-x-full" : "translate-x-full"},
-              'x-transition:enter-end': "translate-x-0",
-              'x-transition:leave': "transition transform duration-700",
-              'x-transition:leave-start': "translate-x-0",
-              'x-transition:leave-end'() {return this.ltr ? "translate-x-full" : "-translate-x-full"}
-      },
-      init(){
-        this.resetTimer(); 
-      }}`}
-          x-init="init()"
-          x-on:mouseover="clearTimeout(timer)"
-          x-on:mouseout="resetTimer()"
-        >
-          <!-- Slides -->
-          <template x-for="(image, index) in slides" :key="index">
-            <div
-              x-show="activeSlide === index"
-              x-transition:enter="absolute left-0 top-0 transition transform duration-700"
-              :x-transition:enter-start="enter"
-              x-transition:enter-end="translate-x-0"
-              x-transition:leave="transition transform duration-700"
-              x-transition:leave-start="translate-x-0"
-              :x-transition:leave-end="leave"
-              class="block"
-            >
-              <img x-bind:src="image" alt="Home slider 1" class="w-full" />
+      <div class="w-full mx-auto flex flex-row overflow-hidden">
+        <div class="swiper w-full h-full relative">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <img src={getAsset('/assets/home-slider/Banner-0.png')} alt="Infospeaks" />
             </div>
-          </template>
+            <div class="swiper-slide"><img src={getAsset('/assets/home-slider/Banner-1.png')} alt="Infospeaks" /></div>
+            <div class="swiper-slide"><img src={getAsset('/assets/home-slider/Banner-2.png')} alt="Infospeaks" /></div>
+          </div>
 
-          <!-- Prev/Next Arrows -->
-          <div class="absolute left-16 bottom-8 flex justify-between">
-            <div class="flex items-center">
-              <button
-                class="bg-white/70 hover:shadow-lg rounded-full w-12 h-12 ml-6 flex items-center justify-center"
-                x-on:click="prev()"
-              >
-                <Icon name="tabler:chevron-left" class="w-5 h-5" />
-              </button>
+          <!-- If we need navigation buttons -->
+          <div class="navigation absolute bottom-8 left-16 z-30 flex gap-6">
+            <div class="slider-button-prev w-11 h-11 rounded-full bg-white/50 flex items-center justify-center">
+              <Icon name="tabler:chevron-left" class="w-5 h-5" />
             </div>
-            <div class="flex items-center ml-6">
-              <button
-                class="bg-white/70 hover:shadow-lg rounded-full w-12 h-12 mr-6 flex items-center justify-center"
-                x-on:click="next()"
-              >
-                <Icon name="tabler:chevron-right" class="w-5 h-5" />
-              </button>
+            <div class="slider-button-next w-11 h-11 rounded-full bg-white/50 flex items-center justify-center">
+              <Icon name="tabler:chevron-right" class="w-5 h-5" />
             </div>
           </div>
         </div>
@@ -121,7 +136,7 @@ const meta = {
   </section>
 
   <section class="relative">
-    <div class="max-w-6xl mx-auto md:h-[600px] px-4 sm:px-6 grid grid-cols-2 gap-4">
+    <div class="max-w-6xl mx-auto md:h-[600px] grid grid-cols-2 gap-4">
       <div class="py-12 flex flex-col justify-center">
         <h3 class="font-bold text-3xl leading-snuge">Get management reports from single version of truth</h3>
         <p class="text-2xl leading-normal pt-7">
@@ -131,14 +146,67 @@ const meta = {
           In Real-time Dashboards
         </p>
       </div>
-      <div class="flex items-center">
+      <div class="flex items-center justify-end">
         <img src={getAsset('/assets/home-report.png')} />
       </div>
     </div>
   </section>
 
+  <!-- what inside -->
+
   <section class="relative">
-    <div class="max-w-6xl mx-auto md:h-[600px] px-4 sm:px-6 grid grid-cols-2 gap-4">
+    <div class="max-w-6xl mx-auto md:h-[600px] p-8 bg-zinc-100">
+      <h3 class="font-bold text-3xl">See What's inside</h3>
+      <div
+        x-data={`{ activeTab: 'management', services:  ${JSON.stringify(services)}}`}
+        x-init="activeTab = window.location.hash ? window.location.hash.replace('#', '') : 'management'"
+      >
+        <ul class="grid grid-cols-6 gap-4 border-b-2 border-zinc-200">
+          <template x-for="service in services" :key="service.key">
+            <li>
+              <a
+                @click="activeTab = service.key "
+                :href="'#' + service.key"
+                x-html="service.label"
+                class="text-center block -mb-[2px] py-6"
+                :class="{ 'border-b-2 border-primary': activeTab === service.key}"
+              >
+              </a>
+            </li>
+          </template>
+        </ul>
+
+        <div class="content pt-6">
+          <template x-for="service in services" :key="service.key">
+            <div x-cloak x-show="activeTab === service.key">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="pt-8">
+                  <h3 x-html="service.header" class="text-2xl font-bold"></h3>
+                  <ul class="list-disc pl-3 max-w-[420px] mt-8 text-lg">
+                    <template x-for="(item, idx) in service.salepoints" :key="service.key + idx">
+                      <li x-html="item" class="mt-5"></li>
+                    </template>
+                  </ul>
+                  <template x-if="service.action">
+                    <a
+                      :href="service.action.href"
+                      x-html="service.action.label"
+                      class="inline-block border border-gray-900 rounded-full px-6 py-3.5 mt-7"></a>
+                  </template>
+                </div>
+                <div>
+                  <img :src="service.image" :alt="service.label" />
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative">
+    <div class="max-w-6xl mx-auto md:h-[600px] grid grid-cols-2 gap-4">
       <div class="py-12 flex flex-col justify-center">
         <h3 class="font-bold text-3xl">Get started with data dashboards</h3>
         <p class="text-2xl leading-normal pt-7">
@@ -169,3 +237,21 @@ const meta = {
 
   <Slogan />
 </Layout>
+
+<script>
+  import Swiper, { Navigation } from 'swiper';
+  new Swiper('.swiper', {
+    modules: [Navigation],
+    direction: 'horizontal',
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '.slider-button-next',
+      prevEl: '.slider-button-prev',
+    },
+  });
+</script>
