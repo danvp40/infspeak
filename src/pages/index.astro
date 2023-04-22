@@ -136,7 +136,7 @@ const services = [
   </section>
 
   <section class="relative">
-    <div class="max-w-6xl mx-auto md:h-[600px] grid grid-cols-2 gap-4">
+    <div class="max-w-6xl mx-auto md:min-h-[600px] grid grid-cols-2 gap-4 px-6">
       <div class="py-12 flex flex-col justify-center">
         <h3 class="font-bold text-3xl leading-snuge">Get management reports from single version of truth</h3>
         <p class="text-2xl leading-normal pt-7">
@@ -155,7 +155,7 @@ const services = [
   <!-- what inside -->
 
   <section class="relative">
-    <div class="max-w-6xl mx-auto md:h-[800px] p-8 bg-zinc-100">
+    <div class="max-w-6xl mx-auto md:min-h-[800px] p-8 bg-zinc-100">
       <h3 class="font-bold text-3xl">See What's inside</h3>
       <div
         x-data={`{ activeTab: 'management', services:  ${JSON.stringify(services)}}`}
@@ -177,7 +177,7 @@ const services = [
           </template>
         </ul>
 
-        <div class="content pt-6 relative">
+        <div class="content pt-6 pb-8 relative">
           <template x-for="service in services" :key="service.key">
             <div
               x-cloak
@@ -214,7 +214,7 @@ const services = [
   </section>
 
   <section class="relative">
-    <div class="max-w-6xl mx-auto md:h-[600px] grid grid-cols-2 gap-4">
+    <div class="max-w-6xl mx-auto md:h-[600px] grid grid-cols-2 gap-4 px-6">
       <div class="py-12 flex flex-col justify-center">
         <h3 class="font-bold text-3xl">Get started with data dashboards</h3>
         <p class="text-2xl leading-normal pt-7">
