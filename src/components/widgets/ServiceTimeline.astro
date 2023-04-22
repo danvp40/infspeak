@@ -1,0 +1,42 @@
+---
+interface Report {
+  id: string;
+  charts: Array<string>;
+}
+
+export interface Props {
+  services: Array<Report>;
+}
+
+const { services } = Astro.props;
+---
+
+<div class="relative px-4">
+  <!-- start::Timeline item -->
+  {
+    services.map((service, idx) => {
+      return (
+        <section id={service.id}>
+          {service.charts.map((chart, chartIdx) => {
+            return (
+              <div class="flex items-center w-full relative">
+                {idx == services.length - 1 && chartIdx == service.charts.length - 1 ? null : (
+                  <div class="absolute h-full border border-gray-400 top-32 left-[1px]" />
+                )}
+                <div class="w-9 z-9 -translate-x-1/2 self-start mt-32">
+                  <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full" />
+                </div>
+                <div class="flex-1 pb-6">
+                  <div class="shadow-lg rounded-3xl border border-zinc-200 overflow-hidden">
+                    <img src={chart} />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </section>
+      );
+    })
+  }
+  <!-- end::Timeline item -->
+</div>

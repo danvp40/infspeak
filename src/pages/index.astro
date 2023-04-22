@@ -3,16 +3,9 @@ import { SITE } from '~/config.mjs';
 import Layout from '~/layouts/PageLayout.astro';
 
 import { Icon } from 'astro-icon';
-
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
 import Slogan from '~/components/widgets/Slogan.astro';
+import Services from '~/components/widgets/Services.astro';
 import { getAsset } from '~/utils/permalinks';
-import { stringifyChunk } from 'astro/dist/runtime/server';
 
 const meta = {
   title: SITE.title,
@@ -154,64 +147,7 @@ const services = [
 
   <!-- what inside -->
 
-  <section class="relative">
-    <div class="max-w-6xl mx-auto md:min-h-[800px] p-8 bg-zinc-100">
-      <h3 class="font-bold text-3xl">See What's inside</h3>
-      <div
-        x-data={`{ activeTab: 'management', services:  ${JSON.stringify(services)}}`}
-        x-init="activeTab = window.location.hash ? window.location.hash.replace('#', '') : 'management'"
-      >
-        <ul class="tabs grid grid-cols-6 gap-4 border-b-2 border-zinc-200">
-          <template x-for="service in services" :key="service.key">
-            <li>
-              <a
-                @click="activeTab = service.key "
-                :href="'#' + service.key"
-                class="tab"
-                :class="{ 'active': activeTab === service.key}"
-              >
-                <img :src="service.icon" :alt="service.label" class="w-[100px]" />
-                <span x-html="service.label"></span>
-              </a>
-            </li>
-          </template>
-        </ul>
-
-        <div class="content pt-6 pb-8 relative">
-          <template x-for="service in services" :key="service.key">
-            <div
-              x-cloak
-              x-show="activeTab === service.key"
-              x-transition:enter="transition ease-out duration-300 z-20"
-              x-transition:enter-start="opacity-0 scale-90"
-              x-transition:enter-end="opacity-100 scale-100"
-              x-transition:leave="opacity-0 absolute"
-            >
-              <div class="grid grid-cols-2 gap-4">
-                <div class="pt-8">
-                  <h3 x-html="service.header" class="text-2xl font-medium"></h3>
-                  <ul class="list-disc pl-3 max-w-[500px] mt-8 text-lg">
-                    <template x-for="(item, idx) in service.salepoints" :key="service.key + idx">
-                      <li x-html="item" class="mt-5"></li>
-                    </template>
-                  </ul>
-                  <template x-if="service.action">
-                    <a
-                      :href="service.action.href"
-                      x-html="service.action.label"
-                      class="inline-block border border-gray-900 rounded-full px-6 py-3.5 mt-7"></a>
-                  </template>
-                </div>
-                <div>
-                  <img :src="service.image" :alt="service.label" />
-                </div>
-              </div>
-            </div>
-          </template>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Services services={services} defaultTab="sales" />
 
   <section class="relative">
     <div class="max-w-6xl mx-auto md:h-[600px] grid grid-cols-2 gap-4 px-6">
@@ -246,21 +182,6 @@ const services = [
   <Slogan />
 </Layout>
 
-<style>
-  .tabs .tab {
-    @apply text-center flex flex-col gap-2 items-center -mb-[2px] py-6;
-  }
-
-  .tabs .tab.active {
-    @apply border-b-2 border-primary;
-  }
-  .tabs .tab img {
-  }
-  .tabs .tab.active img {
-    @apply -rotate-180;
-    @apply transition-transform ease-in-out duration-300;
-  }
-</style>
 <script>
   import Swiper, { Navigation } from 'swiper';
   new Swiper('.swiper', {
