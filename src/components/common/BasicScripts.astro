@@ -31,6 +31,17 @@ import { SITE } from '~/config.mjs';
     }
   }
 
+  window.showModal = function (id) {
+    hideModal();
+    document.getElementById(id).classList.remove('hidden');
+  };
+
+  window.hideModal = function () {
+    document.querySelectorAll('.modal').forEach((item) => {
+      item.classList.remove('hidden');
+    });
+  };
+
   window.onload = function () {
     let lastKnownScrollPosition = window.scrollY;
     let ticking = true;

@@ -15,6 +15,7 @@ interface Link {
 
 interface ActionLink extends Link {
   type?: string;
+  extra?: object;
 }
 
 interface MenuLink extends Link {
@@ -120,13 +121,14 @@ const {
           {
             actions?.length ? (
               <span>
-                {actions.map(({ text, href, type }) => (
+                {actions.map(({ text, href, type, extra = {} }) => (
                   <a
                     class:list={[
                       'btn ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm',
                       { 'btn-ghost': type === 'ghost', 'btn-primary': type === 'primary' },
                     ]}
                     href={href}
+                    {...extra}
                   >
                     <Fragment set:html={text} />
                   </a>
