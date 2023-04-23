@@ -10,7 +10,10 @@ import { getAsset } from '../../utils/permalinks';
     <div class="py-12 md:py-20">
       <div class="slogan">‘Info Speak <span class="small">stands by You as</span> <br /> Finance Business Partner’</div>
       <div class="cta pt-16 flex justify-center">
-        <a href="#" class="inline-block text-white border rounded-full border-slate-50 py-3 px-6">Request a demo</a>
+        <a
+          @click="modal = 'request-demo'"
+          class="inline-block text-white border rounded-full border-slate-50 py-3 px-6 cursor-pointer">Request a demo</a
+        >
       </div>
     </div>
   </div>

@@ -16,7 +16,7 @@ export const headerData = {
     },
   ],
   actions: [
-    { type: 'primary', text: 'Request a demo', href: '#' }
+    { type: 'primary', text: 'Request a demo', extra: {"@click": "modal = 'request-demo'"} }
   ],
 };
   
