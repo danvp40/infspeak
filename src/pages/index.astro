@@ -5,7 +5,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import { Icon } from 'astro-icon';
 import Slogan from '~/components/widgets/Slogan.astro';
 import Services from '~/components/widgets/Services.astro';
-import Modal from '~/components/common/Modal.astro';
+import ContactFormModal from '~/components/widgets/ContactFormModal.astro';
 import { getAsset } from '~/utils/permalinks';
 
 const meta = {
@@ -182,46 +182,7 @@ const services = [
 
   <Slogan />
   <!-- Contact form -->
-  <Modal id="request-demo" title="Request a demo">
-    <form class="mt-6">
-      <div class="form-group mt-3">
-        <label for="userName" class="sr-only">Name</label>
-        <input
-          type="text"
-          id="userName"
-          name="user_name"
-          placeholder="Name"
-          class="mt-1 w-full rounded-md border border-gray-200 px-3 py-3"
-        />
-      </div>
-
-      <div class="form-group mt-3">
-        <label for="userEmail" class="sr-only">Email</label>
-        <input
-          type="email"
-          id="userEmail"
-          name="email"
-          placeholder="Email"
-          class="mt-1 w-full rounded-md border border-gray-200 px-3 py-3"
-        />
-      </div>
-
-      <div class="form-group mt-3">
-        <label for="userPhone" class="sr-only">Phone number</label>
-        <input
-          type="text"
-          id="userPhone"
-          name="phone_number"
-          placeholder="Phone number"
-          class="mt-1 w-full rounded-md border border-gray-200 px-3 py-3"
-        />
-      </div>
-      <div class="pt-8 flex justify-center">
-        <button class="btn-primary rounded-full px-6 py-3">Send now</button>
-      </div>
-    </form>
-    <span slot="action"></span>
-  </Modal>
+  <ContactFormModal />
 </Layout>
 
 <script>
