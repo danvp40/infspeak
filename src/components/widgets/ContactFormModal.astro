@@ -1,6 +1,7 @@
 ---
 import Icon from 'astro-icon';
 import Modal from '../common/Modal.astro';
+import { SITE } from '~/config.mjs';
 ---
 
 <Modal id="request-demo">
@@ -8,9 +9,10 @@ import Modal from '../common/Modal.astro';
     <div x-show="!completed">
       <p class="font-bold md:text-2xl text-lg mb-6">Request a demo</p>
       <form
+        action={SITE.formSubmitUrl}
         @submit.prevent="
           submitting = true;
-    fetch('https://formsubmit.co/bluesky.1289@gmail.com',{ method: 'POST', body: new FormData($el)}).then(() => {
+    fetch($el.action,{ method: 'POST', body: new FormData($el)}).then(() => {
       completed = true;
       submitting = false;
     })

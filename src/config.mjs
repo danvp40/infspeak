@@ -1,15 +1,15 @@
-import defaultImage from './assets/images/default.png';
+import defaultImage from './assets/images/og-image.png';
 
 const CONFIG = {
   name: 'AstroWind',
-
   origin: 'https://danvp40.github.io/',
   basePathname: '/infspeak/',
+  formSubmitUrl: 'https://formsubmit.co/bluesky.1289@gmail.com',
   trailingSlash: false, 
 
-  title: 'AstroWind — Free template for create a website with Astro + Tailwind CSS',
+  title: 'InfoSpeak — Your Financial Partner',
   description:
-    '🚀 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs.',
+    '🚀 Our company provide awesome serivces',
   defaultImage: defaultImage,
 
   defaultTheme: 'light', // Values: "system" | "light" | "dark" | "light:only" | "dark:only"
@@ -25,7 +25,7 @@ const CONFIG = {
   }),
 
   googleAnalyticsId: false, // or "G-XXXXXXXXXX",
-  googleSiteVerificationId: 'orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M',
+  googleSiteVerificationId: '',
 
   blog: {
     disabled: false,
