@@ -30,31 +30,33 @@ const { services, defaultTab } = Astro.props;
 ---
 
 <section class="relative">
-  <div class="max-w-6xl mx-auto md:min-h-[800px] p-8 bg-zinc-100">
+  <div class="max-w-6xl mx-auto md:min-h-[800px] p-4 md:p-8 bg-zinc-100">
     <h3 class="font-bold text-3xl">See What's inside</h3>
     <div
       x-data={`{ activeTab: null, services:  ${JSON.stringify(services)}}`}
       x-init={`activeTab = window.location.hash ? window.location.hash.replace('#', '') : '${defaultTab}'`}
     >
-      <ul class="tabs grid grid-cols-6 gap-4 border-b-2 border-zinc-200">
-        {
-          services.map((service) => {
-            return (
-              <li x-data={`{tabName: "${service.key}"}`}>
-                <a
-                  x-on:click="activeTab = tabName"
-                  href={'#' + service.key}
-                  class="tab"
-                  x-bind:class="{ 'active': activeTab === tabName}"
-                >
-                  <img src={service.icon} alt={service.label} class="w-[100px]" />
-                  <span set:html={service.label} />
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
+      <div class="tab-container w-full overflow-x-auto overflow-y-hidden">
+        <ul class="tabs w-auto inline-flex md:grid md:grid-cols-6 border-b-2 border-zinc-200 gap-4">
+          {
+            services.map((service) => {
+              return (
+                <li x-data={`{tabName: "${service.key}"}`} class="min-w-[140px]">
+                  <a
+                    x-on:click="activeTab = tabName"
+                    href={'#' + service.key}
+                    class="tab"
+                    x-bind:class="{ 'active': activeTab === tabName}"
+                  >
+                    <img src={service.icon} alt={service.label} class="w-[100px]" />
+                    <span set:html={service.label} />
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
 
       <div class="content pt-6 pb-8 relative">
         {
@@ -84,38 +86,38 @@ const { services, defaultTab } = Astro.props;
                 x-transition:enter-end="opacity-100 scale-100"
                 x-transition:leave="opacity-0 absolute"
               >
-                <div class="grid grid-cols-2 gap-4">
-                  <div class="pt-8">
-                    <h3 set:html={service.header} class="text-2xl font-medium" />
-                    <ul class="list-disc pl-3 max-w-[500px] mt-8 text-lg">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div class="pt-6 md:pt-8">
+                    <h3 set:html={service.header} class="text-lg md:text-2xl font-medium" />
+                    <ul class="list-disc pl-3 max-w-[500px] mt-5 md:mt-8 text-base md:text-lg">
                       {service.salepoints.map((item: string) => (
-                        <li set:html={item} class="mt-5" />
+                        <li set:html={item} class="mt-2 md:mt-5 pl-2" />
                       ))}
                     </ul>
                     {service.action ? (
                       <a
                         href={service.action.href}
                         set:html={service.action.label}
-                        class="inline-block border border-gray-900 rounded-full px-6 py-3.5 mt-7"
+                        class="inline-block border border-gray-900 rounded-full px-6 py-2.5 md:py-3.5 mt-5 md:mt-7 text-sm md:text-base"
                       />
                     ) : null}
                   </div>
-                  <div>
+                  <div class="mt-4 lg:mt-0 overflow-hidden">
                     {service.demo ? (
                       <div class="container">
-                        <div class="grid gap-4 grid-cols-3">
+                        <div class="grid gap-4 grid-cols-3 pl-10 md:pl-0">
                           {service.demo.data.map((item, index) => {
                             return (
                               <div class="pt-5">
                                 <div class="report-value grid grid-cols-2">
                                   <div class="text-right pr-2 pt-2 whitespace-nowrap">
-                                    <h4 class="uppercase font-bold text-sm relative">
+                                    <h4 class="uppercase font-bold text-[10px] md:text-sm relative">
                                       <span class="opacity-0">1-space</span>
-                                      <span class="absolute text-gray-600 right-0">{item.label}</span>
+                                      <span class="absolute text-gray-600 right-0 top-0">{item.label}</span>
                                     </h4>
-                                    <h4 class="text-cyan-500 font-bold text-xl relative">
+                                    <h4 class="text-cyan-500 font-bold text-sm md:text-xl relative">
                                       <span class="opacity-0">1-space</span>
-                                      <span class="absolute right-0 whitespace-nowrap">
+                                      <span class="absolute right-0 top-0 whitespace-nowrap">
                                         {Array.isArray(item.data) ? (
                                           <div class="flex gap-2">
                                             {item.data.map(({ value, suffix }) => {
@@ -132,7 +134,7 @@ const { services, defaultTab } = Astro.props;
                                           });"
                                                 >
                                                   <span x-text="display" />
-                                                  <span class="-ml-1">{suffix}</span>
+                                                  <span class="-ml-0.5">{suffix}</span>
                                                 </span>
                                               );
                                             })}
@@ -153,7 +155,7 @@ const { services, defaultTab } = Astro.props;
                                             <span x-text="display" />
                                             {item.data.suffix ? (
                                               <span
-                                                class={item.data.suffixClass || '-ml-1'}
+                                                class={item.data.suffixClass || '-ml-0.5'}
                                                 set:html={item.data.suffix}
                                               />
                                             ) : null}
@@ -183,7 +185,11 @@ const { services, defaultTab } = Astro.props;
                                     ]}
                                   >
                                     <div class="inner p-1 relative">
-                                      <img src={item.image} class="rounded-full w-28 h-28" alt={item.label} />
+                                      <img
+                                        src={item.image}
+                                        class="rounded-full w-[56px] md:w-28 h-[56px] md:h-28"
+                                        alt={item.label}
+                                      />
                                       <div class="arrow" />
                                     </div>
                                   </div>
@@ -208,6 +214,13 @@ const { services, defaultTab } = Astro.props;
 </section>
 
 <style>
+  .tab-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-container {
+    scrollbar-width: none;
+  }
   .tabs .tab {
     @apply text-center flex flex-col gap-2 items-center -mb-[2px] py-6;
   }

@@ -48,7 +48,11 @@ const services = [
       data: [
         {
           label: 'flash',
-          data: { value: 100.7, suffix: '$', suffixClass: '-ml-0.5 align-top text-gray-700 font-normal text-xs' },
+          data: {
+            value: 100.7,
+            suffix: '$',
+            suffixClass: 'align-super -ml-0.5 text-gray-700 font-normal text-[8px] md:text-xs',
+          },
           image: getAsset('/assets/services/sales/nav/flash.png'),
         },
         {
@@ -57,7 +61,7 @@ const services = [
             value: 12.3,
             suffix: '%',
             icon: 'mdi:caret-up',
-            iconClass: 'w-7 -ml-1 inline-block text-green-500',
+            iconClass: 'w-5 md:w-7 -ml-0.5 inline-block text-green-500',
           },
           image: getAsset('/assets/services/sales/nav/growth.png'),
         },
@@ -73,14 +77,18 @@ const services = [
           label: 'optimal point',
           data: {
             value: 2.3,
-            suffix: `<span class="inline-flex items-center"> Slope = <div class="grid grid-rows-2"><div>△y</div> <div>△x</div></div></span>`,
-            suffixClass: 'text-gray-700 font-normal text-xs',
+            suffix: `<span class="inline-flex items-center"> Slope = <div><div class="h-3 md:h-auto">△y</div> <div>△x</div></div></span>`,
+            suffixClass: 'text-gray-700 font-normal text-[8px] md:text-xs',
           },
           image: getAsset('/assets/services/sales/nav/optimal-points.png'),
         },
         {
           label: 'insights',
-          data: { value: 135, suffix: '$', suffixClass: '-ml-0.5 align-top text-gray-700 font-normal text-xs' },
+          data: {
+            value: 135,
+            suffix: '$',
+            suffixClass: '-ml-0.5 align-super text-gray-700 font-normal text-[8px] md:text-xs',
+          },
           image: getAsset('/assets/services/sales/nav/insights.png'),
         },
         {
@@ -89,7 +97,7 @@ const services = [
             value: 12.3,
             suffix: '%',
             icon: 'tabler:arrow-narrow-down',
-            iconClass: 'w-4 inline-block text-red-500',
+            iconClass: 'w-2.5 md:w-4 ml-0.5 inline-block text-red-500',
           },
           image: getAsset('/assets/services/sales/nav/trend.png'),
         },
@@ -181,10 +189,12 @@ const services = [
   </section>
 
   <section class="relative">
-    <div class="max-w-6xl mx-auto md:min-h-[600px] grid grid-cols-2 gap-4 px-6">
-      <div class="py-12 flex flex-col justify-center">
-        <h3 class="font-bold text-3xl leading-snuge">Get management reports from single version of truth</h3>
-        <p class="text-2xl leading-normal pt-7">
+    <div class="max-w-6xl mx-auto md:min-h-[600px] grid md:grid-cols-2 grid-cols-1 gap-4 px-4 md:px-6">
+      <div class="pt-9 pb-3 md:py-12 flex flex-col justify-center">
+        <h3 class="font-bold text-2xl md:text-3xl leading-snuge">
+          Get management reports from single version of truth
+        </h3>
+        <p class="text-lg md:text-2xl leading-normal pt-4 md:pt-7">
           Captivate your business facts<br />
           On all key functions<br />
           With an agile BI Solution<br />
@@ -202,10 +212,10 @@ const services = [
   <Services services={services} defaultTab="sales" />
 
   <section class="relative">
-    <div class="max-w-6xl mx-auto md:h-[600px] grid grid-cols-2 gap-4 px-6">
-      <div class="py-12 flex flex-col justify-center">
-        <h3 class="font-bold text-3xl">Get started with data dashboards</h3>
-        <p class="text-2xl leading-normal pt-7">
+    <div class="max-w-6xl mx-auto md:h-[600px] grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-6">
+      <div class="pt-8 pb-4 md:py-12 flex flex-col justify-center">
+        <h3 class="font-bold text-2xl md:text-3xl">Get started with data dashboards</h3>
+        <p class="text-xl md:text-2xl leading-normal pt-4 md:pt-7">
           Gain your business measures<br />
           In synergy practices<br />
           From data capture<br />
@@ -220,10 +230,12 @@ const services = [
 
   <section class="relative">
     <div class="max-w-6xl mx-auto md:h-[600px] px-4 sm:px-6 bg-zinc-200 flex items-center justify-center">
-      <div class="py-12 md:py-20 text-center">
-        <div class="font-thin text-3xl">Create data dashboards in</div>
-        <h3 class="font-bold text-3xl mt-3">Customized Analytical Management Reports</h3>
-        <p class="text-lg border border-zinc-300 p-8 inline-block max-w-[820px] md:mt-16">
+      <div class="py-8 md:py-20 text-center">
+        <div class="font-thin text-2xl md:text-3xl">Create data dashboards in</div>
+        <h3 class="font-bold text-2xl md:text-3xl mt-3">Customized Analytical Management Reports</h3>
+        <p
+          class="text-base md:text-lg border border-zinc-300 rounded-md p-6 md:p-8 inline-block w-full md:max-w-[820px] mt-6 md:mt-16"
+        >
           That‘s all it take to start transforming your data into live ﬁnancial management reports That’ll provide
           business insights supporting for data driven-making decisions.
         </p>
