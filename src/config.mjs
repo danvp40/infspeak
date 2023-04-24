@@ -1,4 +1,4 @@
-import defaultImage from './assets/images/og-image.png';
+import defaultImage from './assets/images/og-image.jpg';
 
 const CONFIG = {
   name: 'AstroWind',

@@ -1,5 +1,5 @@
 ---
-import { string } from 'astro/zod';
+import { getAsset } from '~/utils/permalinks';
 
 interface Action {
   label: string;
@@ -27,8 +27,8 @@ const { services, defaultTab } = Astro.props;
   <div class="max-w-6xl mx-auto md:min-h-[800px] p-8 bg-zinc-100">
     <h3 class="font-bold text-3xl">See What's inside</h3>
     <div
-      x-data={`{ activeTab: '${defaultTab}', services:  ${JSON.stringify(services)}}`}
-      x-init="activeTab = window.location.hash ? window.location.hash.replace('#', '') : 'management'"
+      x-data={`{ activeTab: null, services:  ${JSON.stringify(services)}}`}
+      x-init={`activeTab = window.location.hash ? window.location.hash.replace('#', '') : '${defaultTab}'`}
     >
       <ul class="tabs grid grid-cols-6 gap-4 border-b-2 border-zinc-200">
         <template x-for="service in services" :key="service.key">
@@ -55,6 +55,22 @@ const { services, defaultTab } = Astro.props;
             x-transition:enter-start="opacity-0 scale-90"
             x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="opacity-0 absolute"
+            x-data="{animating: false, animated: false}"
+            x-init="
+            setTimeout(() => {
+              if($el.getBoundingClientRect().top < (window.innerHeight - 100) && activeTab == service.key){
+                 animating = true;
+              }
+            }, 100)
+            
+            $watch('activeTab', (value) => {
+              if(value == service.key && $el.getBoundingClientRect().top < (window.innerHeight - 100)){
+                animated = false;
+                animating = true;
+              }
+            })
+            "
+            @scroll.window="if($el.getBoundingClientRect().top < (window.innerHeight - 100) && activeTab == service.key && !animated) animating = true;"
           >
             <div class="grid grid-cols-2 gap-4">
               <div class="pt-8">
@@ -72,7 +88,74 @@ const { services, defaultTab } = Astro.props;
                 </template>
               </div>
               <div>
-                <img :src="service.image" :alt="service.label" />
+                <template x-if="service.demo">
+                  <div class="container">
+                    <div class="grid gap-4 grid-cols-3">
+                      <template x-for="(item, index) in service.demo.data">
+                        <div class="pt-5">
+                          <div class="report-value grid grid-cols-2">
+                            <div class="text-right pr-2 pt-2 whitespace-nowrap">
+                              <h4 class="uppercase font-bold text-sm relative">
+                                <span x-text="item.label" class="opacity-0"></span>
+                                <span x-text="item.label" class="absolute right-0"></span>
+                              </h4>
+                              <h4 class="text-cyan-500 font-bold text-xl relative">
+                                <span x-text="item.value" class="opacity-0"></span>
+                                <span class="absolute right-0">
+                                  <template x-if="!Array.isArray(item.value)">
+                                    <span
+                                      x-data="animateCounter(item.value)"
+                                      x-init="
+                                          if(animating) updatecounter(); 
+                                          $watch('animating', (value) => {
+                                            if(value){
+                                              current = start;
+                                              updatecounter();
+                                            }
+                                          });"
+                                      x-text="display"></span>
+                                  </template>
+                                  <template x-if="Array.isArray(item.value)">
+                                    <div class="flex gap-2">
+                                      <template x-for="value in item.value">
+                                        <span
+                                          x-data="animateCounter(value)"
+                                          x-init="
+                                          if(animating) updatecounter(); 
+                                          $watch('animating', (value) => {
+                                            if(value){
+                                              current = start;
+                                              updatecounter();
+                                            }
+                                          });"
+                                          x-text="display"></span>
+                                      </template>
+                                    </div>
+                                  </template>
+                                </span>
+                              </h4>
+                            </div>
+                            <div class="stick h-full border-l border-primary"></div>
+                          </div>
+                          <div class="report-chart flex justify-center">
+                            <div
+                              class="circle"
+                              :class="{'circle-l': index <2, 'half-circle': index == 2, 'circle-r': index > 2, 'end': index == 3}"
+                            >
+                              <div class="inner p-1 relative">
+                                <img :src="item.image" class="rounded-full w-28 h-28" :alt="item.label" />
+                                <div class="arrow"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+                <template x-if="!service.demo">
+                  <img :src="service.image" :alt="service.label" />
+                </template>
               </div>
             </div>
           </div>
@@ -96,4 +179,104 @@ const { services, defaultTab } = Astro.props;
     @apply -rotate-180;
     @apply transition-transform ease-in-out duration-300;
   }
+
+  .stick {
+    transform: translate(-1px, 1px);
+    position: relative;
+  }
+
+  .stick::before {
+    @apply absolute border border-primary rounded-full;
+    content: '';
+    width: 9px;
+    height: 9px;
+    top: -9px;
+    left: -5px;
+  }
+
+  .circle {
+    @apply rounded-full border border-primary border-t-transparent rotate-45;
+  }
+
+  .circle > .inner {
+    @apply -rotate-45;
+  }
+
+  .circle-r {
+    @apply -rotate-45;
+  }
+
+  .circle-r > .inner {
+    @apply rotate-45;
+  }
+
+  .half-circle {
+    @apply border-r-transparent;
+  }
+
+  .end .arrow {
+    display: none;
+  }
+
+  .arrow {
+    @apply w-px absolute h-3 border-x border-l-transparent border-primary;
+  }
+  .arrow:after {
+    @apply border-primary absolute;
+    content: '';
+
+    border-width: 5px;
+    border-bottom-width: 0;
+    border-left: solid 4px transparent;
+    border-right: solid 4px transparent;
+    bottom: -5px;
+    left: -3.5px;
+  }
+
+  .circle-l .arrow {
+    @apply top-1/2 origin-top -rotate-90;
+    right: -1px;
+  }
+
+  .circle-r .arrow {
+    @apply top-1/2 origin-top rotate-90;
+    left: -1px;
+  }
+
+  .half-circle .arrow {
+    @apply bottom-0 left-1/2;
+    transform: translate(-1px, 100%);
+  }
 </style>
+
+<script>
+  window.animateCounter = function (target, time = 100, start = 0) {
+    return {
+      current: 0,
+      display: 0,
+      target: target,
+      time: time,
+      start: start,
+      my_animating: false,
+      updatecounter: function () {
+        if (this.animated || this.my_animating) return;
+
+        start = this.start;
+        this.my_animating = true;
+        const increment = (this.target - start) / this.time;
+        const handle = setInterval(() => {
+          if (this.current < this.target) {
+            this.current += increment;
+            this.display = Number.isInteger(this.target) ? Math.round(this.current) : this.current.toFixed(1);
+          } else {
+            clearInterval(handle);
+            this.display = this.target;
+            this.animated = true;
+            this.animating = false;
+            this.my_animating = false;
+          }
+        }, 1);
+      },
+    };
+  };
+</script>
