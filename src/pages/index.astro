@@ -48,32 +48,49 @@ const services = [
       data: [
         {
           label: 'flash',
-          value: 100.7,
+          data: { value: 100.7, suffix: '$', suffixClass: '-ml-0.5 align-top text-gray-700 font-normal text-xs' },
           image: getAsset('/assets/services/sales/nav/flash.png'),
         },
         {
           label: 'growth rate',
-          value: 12.3,
+          data: {
+            value: 12.3,
+            suffix: '%',
+            icon: 'mdi:caret-up',
+            iconClass: 'w-7 -ml-1 inline-block text-green-500',
+          },
           image: getAsset('/assets/services/sales/nav/growth.png'),
         },
         {
           label: 'distribution',
-          value: [80, 20],
+          data: [
+            { value: 80, suffix: '%' },
+            { value: 20, suffix: '%' },
+          ],
           image: getAsset('/assets/services/sales/nav/distribution.png'),
         },
         {
           label: 'optimal point',
-          value: 2.3,
+          data: {
+            value: 2.3,
+            suffix: `<span class="inline-flex items-center"> Slope = <div class="grid grid-rows-2"><div>△y</div> <div>△x</div></div></span>`,
+            suffixClass: 'text-gray-700 font-normal text-xs',
+          },
           image: getAsset('/assets/services/sales/nav/optimal-points.png'),
         },
         {
           label: 'insights',
-          value: 135,
+          data: { value: 135, suffix: '$', suffixClass: '-ml-0.5 align-top text-gray-700 font-normal text-xs' },
           image: getAsset('/assets/services/sales/nav/insights.png'),
         },
         {
           label: 'trend',
-          value: 12.3,
+          data: {
+            value: 12.3,
+            suffix: '%',
+            icon: 'tabler:arrow-narrow-down',
+            iconClass: 'w-4 inline-block text-red-500',
+          },
           image: getAsset('/assets/services/sales/nav/trend.png'),
         },
       ],
