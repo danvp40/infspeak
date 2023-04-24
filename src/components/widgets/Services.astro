@@ -1,6 +1,5 @@
 ---
-import { isRenderTemplateResult } from 'astro/dist/runtime/server/render/astro';
-import { getAsset } from '~/utils/permalinks';
+import { Icon } from 'astro-icon';
 
 interface Action {
   label: string;
@@ -112,14 +111,14 @@ const { services, defaultTab } = Astro.props;
                                   <div class="text-right pr-2 pt-2 whitespace-nowrap">
                                     <h4 class="uppercase font-bold text-sm relative">
                                       <span class="opacity-0">1-space</span>
-                                      <span class="absolute right-0">{item.label}</span>
+                                      <span class="absolute text-gray-600 right-0">{item.label}</span>
                                     </h4>
                                     <h4 class="text-cyan-500 font-bold text-xl relative">
                                       <span class="opacity-0">1-space</span>
-                                      <span class="absolute right-0">
-                                        {Array.isArray(item.value) ? (
+                                      <span class="absolute right-0 whitespace-nowrap">
+                                        {Array.isArray(item.data) ? (
                                           <div class="flex gap-2">
-                                            {item.value.map((value) => {
+                                            {item.data.map(({ value, suffix }) => {
                                               return (
                                                 <span
                                                   x-data={`animateCounter(${value})`}
@@ -131,14 +130,16 @@ const { services, defaultTab } = Astro.props;
                                               updatecounter();
                                             }
                                           });"
-                                                  x-text="display"
-                                                />
+                                                >
+                                                  <span x-text="display" />
+                                                  <span class="-ml-1">{suffix}</span>
+                                                </span>
                                               );
                                             })}
                                           </div>
                                         ) : (
                                           <span
-                                            x-data={`animateCounter(${item.value})`}
+                                            x-data={`animateCounter(${item.data.value})`}
                                             x-init="
                                           if(animating) updatecounter(); 
                                           $watch('animating', (value) => {
@@ -147,8 +148,22 @@ const { services, defaultTab } = Astro.props;
                                               updatecounter();
                                             }
                                           });"
-                                            x-text="display"
-                                          />
+                                            class="whitespace-nowrap"
+                                          >
+                                            <span x-text="display" />
+                                            {item.data.suffix ? (
+                                              <span
+                                                class={item.data.suffixClass || '-ml-1'}
+                                                set:html={item.data.suffix}
+                                              />
+                                            ) : null}
+
+                                            {item.data.icon ? (
+                                              <span class="-ml-1.5">
+                                                <Icon name={item.data.icon} class={item.data.iconClass} />
+                                              </span>
+                                            ) : null}
+                                          </span>
                                         )}
                                       </span>
                                     </h4>
