@@ -29,8 +29,8 @@ const { data } = Astro.props;
     navigation.items.map(({href: id}) =>{
       const el = document.querySelector(id);
       if(el ){
-        const  pageY = el.getBoundingClientRect().top + window.scrollY
-        if(window.scrollY <= pageY && (window.scrollY + window.innerHeight/2) >= pageY) {
+        const  box = el.getBoundingClientRect()
+        if(box.top < window.innerHeight/2 && box.bottom > 0) {
           current = id;
         }
       }
@@ -85,10 +85,3 @@ const { data } = Astro.props;
       skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 </style>
-<script>
-  window.scrollSpy = function (id) {
-    const el = document.getElementById(id);
-    if (el && window.scrollY < el.offsetTop && window.scrollY + window.innerHeight > el.offsetTop) {
-    }
-  };
-</script>

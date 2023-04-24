@@ -27,8 +27,8 @@ const { services, defaultTab } = Astro.props;
   <div class="max-w-6xl mx-auto md:min-h-[800px] p-8 bg-zinc-100">
     <h3 class="font-bold text-3xl">See What's inside</h3>
     <div
-      x-data={`{ activeTab: '${defaultTab}', services:  ${JSON.stringify(services)}}`}
-      x-init="activeTab = window.location.hash ? window.location.hash.replace('#', '') : 'management'"
+      x-data={`{ activeTab: null, services:  ${JSON.stringify(services)}}`}
+      x-init={`activeTab = window.location.hash ? window.location.hash.replace('#', '') : '${defaultTab}'`}
     >
       <ul class="tabs grid grid-cols-6 gap-4 border-b-2 border-zinc-200">
         <template x-for="service in services" :key="service.key">
@@ -55,6 +55,22 @@ const { services, defaultTab } = Astro.props;
             x-transition:enter-start="opacity-0 scale-90"
             x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="opacity-0 absolute"
+            x-data="{animating: false, animated: false}"
+            x-init="
+            setTimeout(() => {
+              if($el.getBoundingClientRect().top < (window.innerHeight - 100) && activeTab == service.key){
+                 animating = true;
+              }
+            }, 100)
+            
+            $watch('activeTab', (value) => {
+              if(value == service.key && $el.getBoundingClientRect().top < (window.innerHeight - 100)){
+                animated = false;
+                animating = true;
+              }
+            })
+            "
+            @scroll.window="if($el.getBoundingClientRect().top < (window.innerHeight - 100) && activeTab == service.key && !animated) animating = true;"
           >
             <div class="grid grid-cols-2 gap-4">
               <div class="pt-8">
@@ -88,16 +104,30 @@ const { services, defaultTab } = Astro.props;
                                 <span class="absolute right-0">
                                   <template x-if="!Array.isArray(item.value)">
                                     <span
-                                      x-data="animateCounter(item.value, 100, 0)"
-                                      x-init="updatecounter"
+                                      x-data="animateCounter(item.value)"
+                                      x-init="
+                                          if(animating) updatecounter(); 
+                                          $watch('animating', (value) => {
+                                            if(value){
+                                              current = start;
+                                              updatecounter();
+                                            }
+                                          });"
                                       x-text="display"></span>
                                   </template>
                                   <template x-if="Array.isArray(item.value)">
                                     <div class="flex gap-2">
                                       <template x-for="value in item.value">
                                         <span
-                                          x-data="animateCounter(value, 100, 0)"
-                                          x-init="updatecounter"
+                                          x-data="animateCounter(value)"
+                                          x-init="
+                                          if(animating) updatecounter(); 
+                                          $watch('animating', (value) => {
+                                            if(value){
+                                              current = start;
+                                              updatecounter();
+                                            }
+                                          });"
                                           x-text="display"></span>
                                       </template>
                                     </div>
@@ -227,8 +257,12 @@ const { services, defaultTab } = Astro.props;
       target: target,
       time: time,
       start: start,
+      my_animating: false,
       updatecounter: function () {
+        if (this.animated || this.my_animating) return;
+
         start = this.start;
+        this.my_animating = true;
         const increment = (this.target - start) / this.time;
         const handle = setInterval(() => {
           if (this.current < this.target) {
@@ -237,6 +271,9 @@ const { services, defaultTab } = Astro.props;
           } else {
             clearInterval(handle);
             this.display = this.target;
+            this.animated = true;
+            this.animating = false;
+            this.my_animating = false;
           }
         }, 1);
       },
