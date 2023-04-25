@@ -31,6 +31,17 @@ import { SITE } from '~/config.mjs';
     }
   }
 
+  window.showModal = function (id) {
+    hideModal();
+    document.getElementById(id).classList.remove('hidden');
+  };
+
+  window.hideModal = function () {
+    document.querySelectorAll('.modal').forEach((item) => {
+      item.classList.remove('hidden');
+    });
+  };
+
   window.onload = function () {
     let lastKnownScrollPosition = window.scrollY;
     let ticking = true;
@@ -85,9 +96,9 @@ import { SITE } from '~/config.mjs';
 
     function appyHeaderStylesOnScroll() {
       const header = document.getElementById('header');
-      if (lastKnownScrollPosition > 60 && !header.classList.contains('scroll')) {
+      if (lastKnownScrollPosition > 10 && !header.classList.contains('scroll')) {
         document.getElementById('header').classList.add('scroll');
-      } else if (lastKnownScrollPosition <= 60 && header.classList.contains('scroll')) {
+      } else if (lastKnownScrollPosition <= 10 && header.classList.contains('scroll')) {
         document.getElementById('header').classList.remove('scroll');
       }
       ticking = false;

@@ -1,0 +1,53 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import ServiceTimeline from '~/components/widgets/ServiceTimeline.astro';
+import ServiceNavigation from '~/components/widgets/ServiceNavigation.astro';
+
+import { headerData } from '~/data';
+import { getAsset } from '~/utils/permalinks';
+
+const meta = {
+  title: 'Startup Landing Page',
+};
+
+const data = {
+  navigation: {
+    center_label: 'SALE ANALYTICS',
+    items: [
+      { href: '#flash', label: 'flash', image: getAsset('/assets/services/sales/nav/flash.png') },
+      { href: '#growth', label: 'growth', image: getAsset('/assets/services/sales/nav/growth.png') },
+      { href: '#distribution', label: 'distribution', image: getAsset('/assets/services/sales/nav/distribution.png') },
+      { href: '#trend', label: 'trend', image: getAsset('/assets/services/sales/nav/trend.png') },
+      { href: '#insights', label: 'insights', image: getAsset('/assets/services/sales/nav/insights.png') },
+      {
+        href: '#optimal-points',
+        label: 'optimal points',
+        image: getAsset('/assets/services/sales/nav/optimal-points.png'),
+      },
+    ],
+  },
+  services: [
+    { id: 'flash', charts: [3, 4, 5].map((i) => getAsset(`/assets/services/sales/${i}.png`)) },
+    { id: 'growth', charts: [6, 7, 8].map((i) => getAsset(`/assets/services/sales/${i}.png`)) },
+    { id: 'distribution', charts: [9, 10, 11].map((i) => getAsset(`/assets/services/sales/${i}.png`)) },
+    { id: 'trend', charts: [12, 13].map((i) => getAsset(`/assets/services/sales/${i}.png`)) },
+    { id: 'insights', charts: [14].map((i) => getAsset(`/assets/services/sales/${i}.png`)) },
+    { id: 'optimal-points', charts: [15, 16].map((i) => getAsset(`/assets/services/sales/${i}.png`)) },
+  ],
+};
+---
+
+<Layout {meta}>
+  <Fragment slot="header">
+    <Header {...headerData} position="left" />
+  </Fragment>
+
+  <div class="flex">
+    <ServiceNavigation data={data.navigation} />
+
+    <div class="mt-4 p-8 pl-0 mb-20">
+      <ServiceTimeline services={data.services} />
+    </div>
+  </div>
+</Layout>

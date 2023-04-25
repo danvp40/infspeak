@@ -1,0 +1,31 @@
+---
+import { getAsset } from '../../utils/permalinks';
+---
+
+<section class="relative">
+  <div
+    class="max-w-6xl mx-auto md:h-[600px] px-4 sm:px-6 bg-cover bg-center flex items-center justify-center"
+    style={`background-image: url(${getAsset('/assets/slogan-bg.png')})`}
+  >
+    <div class="py-24 md:py-20">
+      <div class="slogan">‘Info Speak <span class="small">stands by You as</span> <br /> Finance Business Partner’</div>
+      <div class="cta pt-8 md:pt-16 flex justify-center">
+        <a
+          @click="modal = 'request-demo'"
+          class="inline-block text-white border rounded-full border-slate-50 py-3 px-6 cursor-pointer">Request a demo</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .slogan {
+    @apply text-3xl md:text-6xl;
+    font-family: 'Philosopher';
+  }
+  .slogan .small {
+    @apply text-2xl md:text-5xl;
+    color: rgba(88, 89, 91, 1);
+  }
+</style>

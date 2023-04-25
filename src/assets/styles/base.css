@@ -1,6 +1,8 @@
+@import 'swiper/css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer components {
   .text-page {
@@ -16,7 +18,8 @@
   }
 
   .bg-dark {
-    @apply bg-slate-900;
+    background-color: rgba(58, 58, 58, 1);
+    /* @apply bg-slate-900; */
   }
 
   
@@ -59,3 +62,5 @@
 [data-aw-toggle-menu].expanded g > path:last-child {
   @apply rotate-45 translate-y-[-8px] translate-x-[14px];
 }
+
+[x-cloak] { display: none !important; }
