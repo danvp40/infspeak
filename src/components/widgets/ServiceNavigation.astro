@@ -19,14 +19,14 @@ const { data } = Astro.props;
 
 <div
   class="relative w-[400px] overflow-hidden z-10 shrink-0"
-  x-data={`{current: null, atTop: true}`}
+  x-data={`{current: null, atTop: true, ids: ${JSON.stringify(data.items.map((x) => x.href))}}`}
   x-init="current = location.hash; atTop = (window.pageYOffset < 50) ? true: false;"
 >
   <div
     class="fixed px-5 w-[400px] transition-all"
-    :class="{'top-20': !atTop, 'top-40': atTop}"
+    :class="{'top-5': !atTop, 'top-30': atTop}"
     @scroll.window="atTop = (window.pageYOffset < 50) ? true: false;
-    navigation.items.map(({href: id}) =>{
+    ids.map((id) =>{
       const el = document.querySelector(id);
       if(el ){
         const  box = el.getBoundingClientRect()
@@ -38,7 +38,7 @@ const { data } = Astro.props;
     "
   >
     <div class="relative w-[348px] h-[696px] overflow-hidden">
-      <div class="w-[250px] h-full absolute top-0 right-8 overflow-hidden">
+      <div class="w-[200px] h-full absolute top-0 right-8 overflow-hidden">
         <div
           class="w-[696px] h-full absolute right-0 top-0 border border-zinc-300 border-l-transparent border-t-transparent rounded-full -rotate-45"
         >
@@ -47,10 +47,10 @@ const { data } = Astro.props;
       <div class="w-[696px] h-full absolute right-8 top-0 flex items-center justify-center">
         {
           data.items.map((item, idx) => {
-            const width = Math.round(232 + Math.pow(Math.abs(-2.5 + idx), 2) * 10);
+            const width = Math.round(174 + Math.pow(Math.abs(-2.5 + idx), 2.3) * 10);
             return (
               <div
-                class="nav-item absolute bottom-1/2 left-2/3 origin-left translate-x-full translate-y-full"
+                class="nav-item absolute bottom-1/2 left-3/4 origin-left translate-x-full translate-y-full"
                 style={{ transform: `rotate(${-90 + 15 + 30 * idx}deg)`, width: width + 'px' }}
               >
                 <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative">
@@ -76,7 +76,7 @@ const { data } = Astro.props;
 
         <!-- center -->
         <div
-          class="w-40 h-40 absolute left-2/3 top-1/2 -translate-x-1/2 -translate-y-1/2 border rounded-full border-gray-800 flex items-center justify-center text-center uppercase font-bold text-xl bg-white z-10"
+          class="w-32 h-32 absolute left-3/4 top-1/2 -translate-x-1/2 -translate-y-1/2 border rounded-full border-gray-800 flex items-center justify-center text-center uppercase font-bold text-lg bg-white z-10"
         >
           {data.center_label}
         </div>
