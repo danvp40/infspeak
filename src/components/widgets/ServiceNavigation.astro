@@ -19,7 +19,7 @@ const { data } = Astro.props;
 
 <div
   class="relative w-[400px] overflow-hidden z-10 shrink-0"
-  x-data={`{navigation: ${JSON.stringify(data)}, current: null, atTop: true}`}
+  x-data={`{current: null, atTop: true}`}
   x-init="current = location.hash; atTop = (window.pageYOffset < 50) ? true: false;"
 >
   <div
@@ -37,39 +37,48 @@ const { data } = Astro.props;
     })
     "
   >
-    <div
-      class="relative w-[464px] h-[464px] border border-zinc-300 border-l-transparent border-t-transparent rounded-full -rotate-45 -translate-x-1/3"
-    >
-      <div class="h-full w-full rotate-45 relative flex items-center justify-center">
-        <template x-for="(item, idx) in navigation.items" :key="item.href">
-          <div
-            class="nav-item absolute bottom-1/2 left-1/2 w-1/2 origin-left translate-x-full translate-y-full"
-            :style="{transform: `rotate(${(-90 + 15 + 30 * idx) }deg)`}"
-          >
-            <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative">
-              <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center" x-text="item.label"></div>
-            </div>
-            <div
-              class="absolute w-20 h-20 right-0 flex items-center justify-center p-1"
-              :style="{transform: `translate(50%, -50%) rotate(${-(-90 + 15 + 30 * idx)}deg)`}"
-            >
-              <a
-                :href="item.href"
-                class="nav transition-transform"
-                :class="{'active': item.href === current}"
-                @click="current = item.href"
+    <div class="relative w-[348px] h-[696px] overflow-hidden">
+      <div class="w-[250px] h-full absolute top-0 right-8 overflow-hidden">
+        <div
+          class="w-[696px] h-full absolute right-0 top-0 border border-zinc-300 border-l-transparent border-t-transparent rounded-full -rotate-45"
+        >
+        </div>
+      </div>
+      <div class="w-[696px] h-full absolute right-8 top-0 flex items-center justify-center">
+        {
+          data.items.map((item, idx) => {
+            const width = Math.round(232 + Math.pow(Math.abs(-2.5 + idx), 2) * 10);
+            return (
+              <div
+                class="nav-item absolute bottom-1/2 left-2/3 origin-left translate-x-full translate-y-full"
+                style={{ transform: `rotate(${-90 + 15 + 30 * idx}deg)`, width: width + 'px' }}
               >
-                <img :src="item.image" :alt="item.label" />
-              </a>
-            </div>
-          </div>
-        </template>
+                <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative">
+                  <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center">{item.label}</div>
+                </div>
+                <div
+                  class="absolute w-20 h-20 right-0 flex items-center justify-center p-1"
+                  style={{ transform: `translate(50%, -50%) rotate(${-(-90 + 15 + 30 * idx)}deg)` }}
+                >
+                  <a
+                    href={item.href}
+                    class="nav transition-transform"
+                    x-bind:class={`{active: '${item.href}' === current}`}
+                    @click={`current = '${item.href}'`}
+                  >
+                    <img src={item.image} alt={item.label} />
+                  </a>
+                </div>
+              </div>
+            );
+          })
+        }
 
         <!-- center -->
         <div
-          class="w-40 h-40 border rounded-full border-gray-800 flex items-center justify-center text-center uppercase font-bold text-xl bg-white z-10"
+          class="w-40 h-40 absolute left-2/3 top-1/2 -translate-x-1/2 -translate-y-1/2 border rounded-full border-gray-800 flex items-center justify-center text-center uppercase font-bold text-xl bg-white z-10"
         >
-          <span x-html="navigation.center_label"></span>
+          {data.center_label}
         </div>
       </div>
     </div>
