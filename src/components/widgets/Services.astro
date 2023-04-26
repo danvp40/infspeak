@@ -30,6 +30,7 @@ const { services, defaultTab } = Astro.props;
 ---
 
 <section class="relative">
+  {services.map(({ key: key }) => <div id={key} />)}
   <div class="max-w-6xl mx-auto md:min-h-[800px] p-4 md:p-8 bg-zinc-100">
     <h3 class="font-bold text-3xl">See What's inside</h3>
     <div
