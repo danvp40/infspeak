@@ -116,6 +116,72 @@ const services = [
       'Provide Financial Ratios, Measures, Indicators give managerial information',
       'Optimize Costs by detecting Experience Curve',
     ],
+    demo: {
+      data: [
+        {
+          label: 'resource cost',
+          data: {
+            value: 82.4,
+            classes: 'text-red-700',
+            suffix: '$',
+            suffixClass: 'align-super -ml-0.5 text-gray-700 font-normal text-[8px] md:text-xs',
+          },
+          image: getAsset('/assets/services/cost-analytics/nav/allocation.png'),
+        },
+        {
+          label: 'change rate',
+          data: {
+            value: 12.4,
+            suffix: '%',
+            classes: 'text-red-700',
+            icon: 'mdi:caret-up',
+            iconClass: 'w-5 md:w-7 -ml-0.5 inline-block text-red-500',
+          },
+          image: getAsset('/assets/services/cost-analytics/nav/change.png'),
+        },
+        {
+          label: 'value chain',
+          data: {
+            value: 5.2,
+            classes: 'text-red-700',
+            head: '<div class="text-gray-700 leading-3 text-[10px] text-left font-normal">Unit Cost</div>',
+            suffix:
+              '<div class="inline-block text-left"><div class="text-[10px] leading-3">$</div><div class="text-[8px] leading-3">PerHour</div></div>',
+            suffixClass: 'text-gray-700 font-normal text-xs',
+          },
+          image: getAsset('/assets/services/cost-analytics/nav/value-chain.png'),
+        },
+        {
+          label: 'experience curve',
+          data: {
+            value: 16,
+            suffix: '%',
+            classes: 'text-red-700',
+          },
+          image: getAsset('/assets/services/cost-analytics/nav/experience-curve.png'),
+        },
+        {
+          label: 'breakevent point',
+          animation: false,
+          data: {
+            value: 'Y = a + bX',
+            classes: 'text-red-700',
+          },
+          image: getAsset('/assets/services/cost-analytics/nav/breakevent-point.png'),
+        },
+        {
+          label: 'insight?',
+          data: {
+            value: 12.4,
+            suffix: '%',
+            classes: 'text-red-700',
+            icon: 'mdi:caret-up',
+            iconClass: 'w-5 md:w-7 -ml-0.5 inline-block text-red-500',
+          },
+          image: getAsset('/assets/services/sales/nav/trend.png'),
+        },
+      ],
+    },
   },
   {
     key: 'pnl',

@@ -102,7 +102,7 @@ const { services, defaultTab } = Astro.props;
                       />
                     ) : null}
                   </div>
-                  <div class="mt-4 lg:mt-0 overflow-hidden">
+                  <div class="mt-4 lg:mt-0">
                     {service.demo ? (
                       <div class="container">
                         <div class="grid gap-4 grid-cols-3 pl-10 md:pl-0">
@@ -110,28 +110,29 @@ const { services, defaultTab } = Astro.props;
                             return (
                               <div class="pt-5">
                                 <div class="report-value grid grid-cols-2">
-                                  <div class="text-right pr-2 pt-2 whitespace-nowrap">
+                                  <div class="text-right pr-2 pt-2 pb-4 whitespace-nowrap">
                                     <h4 class="uppercase font-bold text-[10px] md:text-sm relative">
                                       <span class="opacity-0">1-space</span>
                                       <span class="absolute text-gray-600 right-0 top-0">{item.label}</span>
                                     </h4>
-                                    <h4 class="text-cyan-500 font-bold text-sm md:text-xl relative">
+                                    <h4 class:list={['font-bold text-sm md:text-xl relative']}>
                                       <span class="opacity-0">1-space</span>
                                       <span class="absolute right-0 top-0 whitespace-nowrap">
                                         {Array.isArray(item.data) ? (
                                           <div class="flex gap-2">
-                                            {item.data.map(({ value, suffix }) => {
+                                            {item.data.map(({ value, classes, suffix }) => {
                                               return (
                                                 <span
                                                   x-data={`animateCounter(${value})`}
                                                   x-init="
-                                          if(animating) updatecounter(); 
-                                          $watch('animating', (value) => {
-                                            if(value){
+                                              if(animating) updatecounter(); 
+                                              $watch('animating', (value) => {
+                                              if(value){
                                               current = start;
                                               updatecounter();
-                                            }
-                                          });"
+                                              }
+                                              });"
+                                                  class={classes || 'text-cyan-500'}
                                                 >
                                                   <span x-text="display" />
                                                   <span class="-ml-0.5">{suffix}</span>
@@ -141,17 +142,23 @@ const { services, defaultTab } = Astro.props;
                                           </div>
                                         ) : (
                                           <span
-                                            x-data={`animateCounter(${item.data.value})`}
-                                            x-init="
-                                          if(animating) updatecounter(); 
-                                          $watch('animating', (value) => {
-                                            if(value){
-                                              current = start;
-                                              updatecounter();
+                                            x-data={
+                                              item.animation !== false
+                                                ? `animateCounter(${item.data.value})`
+                                                : `{display: '${item.data.value}'}`
                                             }
-                                          });"
-                                            class="whitespace-nowrap"
+                                            x-init={`
+                                            if(${item.animation || true}){
+                                            if(animating) updatecounter(); 
+                                            $watch('animating', (value) => {
+                                            if(value){
+                                            current = start;
+                                            updatecounter();
+                                            }
+                                            });}`}
+                                            class:list={['whitespace-nowrap', item.data.classes || 'text-cyan-500']}
                                           >
+                                            {item.data.head ? <Fragment set:html={item.data.head} /> : null}
                                             <span x-text="display" />
                                             {item.data.suffix ? (
                                               <span
