@@ -149,10 +149,12 @@ const { services, defaultTab } = Astro.props;
                                             x-data={
                                               item.animation !== false
                                                 ? `animateCounter(${item.data.value})`
-                                                : `{display: '${item.data.value}'}`
+                                                : `{display: '${item.data.value}', shouldAnimate: ${
+                                                    item.animation == null ? true : item.animation
+                                                  }}`
                                             }
                                             x-init={`
-                                            if(${item.animation || true}){
+                                            if(shouldAnimate){
                                             if(animating) updatecounter(); 
                                             $watch('animating', (value) => {
                                             if(value){
@@ -324,8 +326,9 @@ const { services, defaultTab } = Astro.props;
       time: time,
       start: start,
       my_animating: false,
+      shouldAnimate: true,
       updatecounter: function () {
-        if (this.animated || this.my_animating) return;
+        if (this.animated || this.my_animating || !this.shouldAnimate) return;
 
         start = this.start;
         this.my_animating = true;
