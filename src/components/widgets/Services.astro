@@ -110,14 +110,19 @@ const { services, defaultTab } = Astro.props;
                             return (
                               <div class="pt-5">
                                 <div class="report-value grid grid-cols-2">
-                                  <div class="text-right pr-2 pt-2 pb-4 whitespace-nowrap">
+                                  <div class:list={['text-right pr-2 pt-2 pb-5 whitespace-nowrap']}>
                                     <h4 class="uppercase font-bold text-[10px] md:text-sm relative">
                                       <span class="opacity-0">1-space</span>
                                       <span class="absolute text-gray-600 right-0 top-0">{item.label}</span>
                                     </h4>
                                     <h4 class:list={['font-bold text-sm md:text-xl relative']}>
                                       <span class="opacity-0">1-space</span>
-                                      <span class="absolute right-0 top-0 whitespace-nowrap">
+                                      <span
+                                        class:list={[
+                                          'absolute right-0 top-0 p-1 pb-0',
+                                          item.classes || 'text-cyan-500',
+                                        ]}
+                                      >
                                         {Array.isArray(item.data) ? (
                                           <div class="flex gap-2">
                                             {item.data.map(({ value, classes, suffix }) => {
@@ -132,7 +137,6 @@ const { services, defaultTab } = Astro.props;
                                               updatecounter();
                                               }
                                               });"
-                                                  class={classes || 'text-cyan-500'}
                                                 >
                                                   <span x-text="display" />
                                                   <span class="-ml-0.5">{suffix}</span>
