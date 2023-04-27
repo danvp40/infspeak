@@ -1,10 +1,8 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Header from '~/components/widgets/Header.astro';
+import PrivateLayout from '~/layouts/PrivateLayout.astro';
 import ServiceTimeline from '~/components/widgets/ServiceTimeline.astro';
 import ServiceNavigation from '~/components/widgets/ServiceNavigation.astro';
 
-import { headerData } from '~/data';
 import { getAsset } from '~/utils/permalinks';
 
 const meta = {
@@ -38,14 +36,10 @@ const data = {
 };
 ---
 
-<Layout {meta}>
-  <Fragment slot="header">
-    <Header {...headerData} position="left" />
-  </Fragment>
-
+<PrivateLayout {meta}>
   <div class="flex flex-col lg:flex-row">
     <ServiceNavigation data={data.navigation} />
 
     <ServiceTimeline services={data.services} />
   </div>
-</Layout>
+</PrivateLayout>
