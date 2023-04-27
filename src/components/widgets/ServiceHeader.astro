@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon';
+
+import { getHomePermalink, getAsset, isCurrentPath } from '~/utils/permalinks';
+
+export interface Props {
+  isSticky?: boolean;
+}
+
+const { isSticky = false } = Astro.props;
+---
+
+<header
+  class:list={[
+    { sticky: isSticky, relative: !isSticky },
+    'top-0 z-40 flex-none mx-auto w-full transition-all ease-in duration-100 md:border-b',
+  ]}
+>
+  <div class="py-3 px-3 md:py-2 md:px-4 mx-auto w-full flex justify-between">
+    <a href="" class="border border-gray-900 rounded-full px-4 py-2 flex gap-2 items-center">
+      <Icon name="tabler:grid-dots" class="w-5 h-5" /> Services</a
+    >
+    <a href="" class="border border-gray-900 rounded-full px-4 py-2 flex gap-2 items-center">
+      <Icon name="tabler:arrow-left" class="w-5 h-5" /> Back to home</a
+    >
+  </div>
+</header>
