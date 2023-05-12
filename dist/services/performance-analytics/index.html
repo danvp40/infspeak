@@ -44,20 +44,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,400;0,700;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,400;0,700;1,500&family=Philosopher&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/_astro/privacy.0d9cec4f.css" />
-<link rel="stylesheet" href="/_astro/cost-analytics.d0cfcfdc.css" /><script type="module">window.setup=function(r){return{hidden:!1,code:r,error:null,init(){const e=JSON.parse(localStorage.getItem("code")||"[]"),t=localStorage.getItem("time");e&&String.fromCharCode(...e)==String.fromCharCode(...this.code)&&t&&new Date().getTime()-new Date(t).getTime()<108e5&&(this.hidden=!0)},entertain(e){new FormData(e.target).get("text")==String.fromCharCode(...this.code)?(localStorage.setItem("code",JSON.stringify(this.code)),localStorage.setItem("time",new Date),this.hidden=!0,this.error=null):this.error="password is incorrect"}}};
+  <link rel="stylesheet" href="/_astro/privacy.dd3d485e.css" />
+<link rel="stylesheet" href="/_astro/cost-analytics.d0cfcfdc.css" /><script type="module">window.setup=function(r){return{hidden:!1,code:r,error:null,init(){const e=JSON.parse(localStorage.getItem("code")||"[]"),t=localStorage.getItem("time");e&&String.fromCharCode(...e)==String.fromCharCode(...this.code)&&t&&new Date().getTime()-new Date(t).getTime()<108e5?(this.hidden=!0,this.scroll=!0):this.scroll=!1},entertain(e){new FormData(e.target).get("text")==String.fromCharCode(...this.code)?(localStorage.setItem("code",JSON.stringify(this.code)),localStorage.setItem("time",new Date),this.scroll=!0,this.hidden=!0,this.error=null):this.error="password is incorrect"}}};
 </script>
 <script type="module" src="/_astro/page.0fc6666a.js"></script></head>
 
-  <body class="antialiased text-page bg-light dark:text-slate-300 tracking-tight dark:bg-dark" x-data="{modal: null}">
+  <body class="antialiased text-page bg-light dark:text-white tracking-tight dark:bg-dark" x-data="{modal: null, scroll: true}" :class="!scroll ? 'overflow-y-hidden' : null">
     
-  <div class="fixed h-full w-full top-0 left-0 bg-black/75 z-20 flex items-center justify-center" :class="{hidden: hidden}" x-data="setup( [108,101,116,105,116,115,112,101,97,107])">
+  <div class="fixed h-full w-full top-0 left-0 backdrop-blur-sm bg-black/80 z-20 flex items-center justify-center" :class="{hidden: hidden}" x-data="setup( [108,101,116,105,116,115,112,101,97,107])" @scroll.window="$event.preventDefault(); $event.stopPropagation();">
   <div class="w-96 bg-white rounded-xl drop-shadown-lg px-8 py-12">
     <div class="flex justify-center">
-      <img src="/assets/Logo.svg" alt="Infospeaks">
+      <img src="/assets/logo.svg" alt="Infospeaks">
     </div>
 
-    <div class="mt-16">
+    <div class="mt-16 text-gray-800">
       <form @submit.prevent="entertain($event)">
         <div class="form-group mt-3">
           <input type="password" id="text" name="text" placeholder="password" class="mt-1 w-full rounded-md border border-gray-200 px-3 py-3 disabled:bg-gray-100" required>
@@ -76,12 +76,17 @@
   </div>
 </div>
   
-    <header class="relative top-0 z-10 flex-none mx-auto w-full transition-all ease-in duration-100 md:border-b">
+    <header class="relative top-0 z-10 flex-none mx-auto w-full transition-all ease-in duration-100 border-b-2 border-primary">
   <div class="py-3 px-3 md:py-2 md:px-4 mx-auto w-full flex justify-between">
-    <a href="/services/" class="border border-gray-900 rounded-full px-4 py-2 flex gap-2 items-center">
+    <a href="/services/" class="border border-gray-900 dark:border-white rounded-full px-4 py-2 flex gap-2 items-center">
       <svg viewBox="0 0 24 24" class="w-5 h-5" astro-icon="tabler:grid-dots"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon-tabler"><circle cx="5" cy="5" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="19" cy="5" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="19" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="19" cy="19" r="1"/></g></svg> Services</a>
-    <a href="/" class="border border-gray-900 rounded-full px-4 py-2 flex gap-2 items-center">
-      <svg viewBox="0 0 24 24" class="w-5 h-5" astro-icon="tabler:arrow-left"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon-tabler"><path d="M5 12h14M5 12l6 6M5 12l6-6"/></g></svg> Back to home</a>
+    <div class="flex">
+      <a href="/" class="border border-gray-900 dark:border-white rounded-full px-4 py-2 flex gap-2 items-center">
+        <svg viewBox="0 0 24 24" class="w-5 h-5" astro-icon="tabler:arrow-left"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon-tabler"><path d="M5 12h14M5 12l6 6M5 12l6-6"/></g></svg> Back to home</a>
+      <button type="button" class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center" aria-label="Toggle between Dark and Light mode" data-aw-toggle-color-scheme>
+      <svg viewBox="0 0 24 24" class="w-5 h-5" astro-icon="tabler:sun"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon-tabler"><circle cx="12" cy="12" r="4"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7"/></g></svg>
+    </button>
+    </div>
   </div>
 </header>
   
@@ -89,57 +94,60 @@
     
   <div class="flex flex-col lg:flex-row">
     
-  <div class="lg:hidden overflow-x-auto tab-container bg-white shadow-lg astro-U42SK5CC" :class="{'fixed top-0 z-10': fixed}" x-data="{currentTab: '#flash', fixed: false}" @scroll.window="fixed = window.scrollY >= 66 ? true : false;">
-    <div class="inline-flex md:grid grid-cols-6 gap-4 px-4 astro-U42SK5CC">
-      <a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#flash" x-data="{tabName: '#flash'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-              <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                  <img src="/assets/services/performance/nav/flash.png" alt="flash" class="astro-U42SK5CC">
-                  <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+  <div class="astro-U42SK5CC">
+    <div class="lg:hidden overflow-x-auto tab-container bg-white dark:bg-dark shadow-lg pt-3 astro-U42SK5CC" :class="{'fixed top-0 z-10': fixed}" x-data="{currentTab: '#flash', fixed: false}" @scroll.window="fixed = window.scrollY >= 66 ? true : false;">
+      <h3 class="font-bold text-2xl px-4 astro-U42SK5CC">SALE ANALYTICS</h3>
+      <div class="inline-flex md:grid grid-cols-6 gap-4 px-4 astro-U42SK5CC">
+        <a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#flash" x-data="{tabName: '#flash'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
+                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                    <img src="/assets/services/performance/nav/flash.png" alt="flash" class="astro-U42SK5CC">
+                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  </div>
                 </div>
-              </div>
-              <div class="uppercase text-sm text-gray-500 pt-4 text-center astro-U42SK5CC">flash</div>
-            </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#performer" x-data="{tabName: '#performer'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-              <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                  <img src="/assets/services/performance/nav/performer.png" alt="performer" class="astro-U42SK5CC">
-                  <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">flash</div>
+              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#performer" x-data="{tabName: '#performer'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
+                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                    <img src="/assets/services/performance/nav/performer.png" alt="performer" class="astro-U42SK5CC">
+                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  </div>
                 </div>
-              </div>
-              <div class="uppercase text-sm text-gray-500 pt-4 text-center astro-U42SK5CC">performer</div>
-            </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#ranking" x-data="{tabName: '#ranking'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-              <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                  <img src="/assets/services/performance/nav/ranking.png" alt="ranking" class="astro-U42SK5CC">
-                  <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">performer</div>
+              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#ranking" x-data="{tabName: '#ranking'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
+                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                    <img src="/assets/services/performance/nav/ranking.png" alt="ranking" class="astro-U42SK5CC">
+                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  </div>
                 </div>
-              </div>
-              <div class="uppercase text-sm text-gray-500 pt-4 text-center astro-U42SK5CC">ranking</div>
-            </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#variance" x-data="{tabName: '#variance'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-              <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                  <img src="/assets/services/performance/nav/variance.png" alt="variance" class="astro-U42SK5CC">
-                  <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">ranking</div>
+              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#variance" x-data="{tabName: '#variance'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
+                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                    <img src="/assets/services/performance/nav/variance.png" alt="variance" class="astro-U42SK5CC">
+                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  </div>
                 </div>
-              </div>
-              <div class="uppercase text-sm text-gray-500 pt-4 text-center astro-U42SK5CC">variance</div>
-            </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#ev-findings" x-data="{tabName: '#ev-findings'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-              <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                  <img src="/assets/services/performance/nav/ev-findings.png" alt="ev-findings" class="astro-U42SK5CC">
-                  <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">variance</div>
+              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#ev-findings" x-data="{tabName: '#ev-findings'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
+                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                    <img src="/assets/services/performance/nav/ev-findings.png" alt="ev-findings" class="astro-U42SK5CC">
+                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  </div>
                 </div>
-              </div>
-              <div class="uppercase text-sm text-gray-500 pt-4 text-center astro-U42SK5CC">ev-findings</div>
-            </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#ev-management" x-data="{tabName: '#ev-management'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-              <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                  <img src="/assets/services/performance/nav/ev-management.png" alt="EV management" class="astro-U42SK5CC">
-                  
+                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">ev-findings</div>
+              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#ev-management" x-data="{tabName: '#ev-management'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
+                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                    <img src="/assets/services/performance/nav/ev-management.png" alt="EV management" class="astro-U42SK5CC">
+                    
+                  </div>
                 </div>
-              </div>
-              <div class="uppercase text-sm text-gray-500 pt-4 text-center astro-U42SK5CC">EV management</div>
-            </a>
+                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">EV management</div>
+              </a>
+      </div>
     </div>
   </div>
 
@@ -165,7 +173,9 @@
             <div class="h-full w-full absolute flex items-center justify-center astro-U42SK5CC">
               <div class="nav-item absolute bottom-1/2 left-3/4 origin-left translate-x-full translate-y-full astro-U42SK5CC" style="transform:rotate(-68deg);width:322.7904824716127px">
                       <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative astro-U42SK5CC">
-                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center astro-U42SK5CC">flash</div>
+                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center dark:text-white astro-U42SK5CC">
+                          flash
+                        </div>
                       </div>
                       <div class="absolute w-20 h-20 right-0 flex items-center justify-center p-1 astro-U42SK5CC" style="transform:translate(50%, -50%) rotate(68deg)">
                         <a x-data="{href: '#flash'}" href="#flash" class="nav transition-transform astro-U42SK5CC" x-bind:class="{'active': href === current}" @click="current = href">
@@ -174,7 +184,9 @@
                       </div>
                     </div><div class="nav-item absolute bottom-1/2 left-3/4 origin-left translate-x-full translate-y-full astro-U42SK5CC" style="transform:rotate(-45deg);width:269.1418160587065px">
                       <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative astro-U42SK5CC">
-                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center astro-U42SK5CC">performer</div>
+                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center dark:text-white astro-U42SK5CC">
+                          performer
+                        </div>
                       </div>
                       <div class="absolute w-20 h-20 right-0 flex items-center justify-center p-1 astro-U42SK5CC" style="transform:translate(50%, -50%) rotate(45deg)">
                         <a x-data="{href: '#performer'}" href="#performer" class="nav transition-transform astro-U42SK5CC" x-bind:class="{'active': href === current}" @click="current = href">
@@ -183,7 +195,9 @@
                       </div>
                     </div><div class="nav-item absolute bottom-1/2 left-3/4 origin-left translate-x-full translate-y-full astro-U42SK5CC" style="transform:rotate(-16deg);width:236.47250553122421px">
                       <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative astro-U42SK5CC">
-                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center astro-U42SK5CC">ranking</div>
+                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center dark:text-white astro-U42SK5CC">
+                          ranking
+                        </div>
                       </div>
                       <div class="absolute w-20 h-20 right-0 flex items-center justify-center p-1 astro-U42SK5CC" style="transform:translate(50%, -50%) rotate(16deg)">
                         <a x-data="{href: '#ranking'}" href="#ranking" class="nav transition-transform astro-U42SK5CC" x-bind:class="{'active': href === current}" @click="current = href">
@@ -192,7 +206,9 @@
                       </div>
                     </div><div class="nav-item absolute bottom-1/2 left-3/4 origin-left translate-x-full translate-y-full astro-U42SK5CC" style="transform:rotate(16deg);width:236.47250553122421px">
                       <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative astro-U42SK5CC">
-                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center astro-U42SK5CC">variance</div>
+                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center dark:text-white astro-U42SK5CC">
+                          variance
+                        </div>
                       </div>
                       <div class="absolute w-20 h-20 right-0 flex items-center justify-center p-1 astro-U42SK5CC" style="transform:translate(50%, -50%) rotate(-16deg)">
                         <a x-data="{href: '#variance'}" href="#variance" class="nav transition-transform astro-U42SK5CC" x-bind:class="{'active': href === current}" @click="current = href">
@@ -201,7 +217,9 @@
                       </div>
                     </div><div class="nav-item absolute bottom-1/2 left-3/4 origin-left translate-x-full translate-y-full astro-U42SK5CC" style="transform:rotate(45deg);width:269.1418160587065px">
                       <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative astro-U42SK5CC">
-                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center astro-U42SK5CC">ev-findings</div>
+                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center dark:text-white astro-U42SK5CC">
+                          ev-findings
+                        </div>
                       </div>
                       <div class="absolute w-20 h-20 right-0 flex items-center justify-center p-1 astro-U42SK5CC" style="transform:translate(50%, -50%) rotate(-45deg)">
                         <a x-data="{href: '#ev-findings'}" href="#ev-findings" class="nav transition-transform astro-U42SK5CC" x-bind:class="{'active': href === current}" @click="current = href">
@@ -210,7 +228,9 @@
                       </div>
                     </div><div class="nav-item absolute bottom-1/2 left-3/4 origin-left translate-x-full translate-y-full astro-U42SK5CC" style="transform:rotate(68deg);width:322.7904824716127px">
                       <div class="h-full border-t border-zinc-400 uppercase text-[11px] relative astro-U42SK5CC">
-                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center astro-U42SK5CC">EV management</div>
+                        <div class="absolute w-full text-slate-400 pr-10 pl-20 text-center dark:text-white astro-U42SK5CC">
+                          EV management
+                        </div>
                       </div>
                       <div class="absolute w-20 h-20 right-0 flex items-center justify-center p-1 astro-U42SK5CC" style="transform:translate(50%, -50%) rotate(-68deg)">
                         <a x-data="{href: '#ev-management'}" href="#ev-management" class="nav transition-transform astro-U42SK5CC" x-bind:class="{'active': href === current}" @click="current = href">
@@ -232,14 +252,14 @@
 
 
 
-    <div class="pt-9 lg:pt-4 lg:p-8 pl-0 mb-20 bg-gray-100 lg:bg-white">
+    <div class="pt-9 lg:pt-4 lg:p-8 pl-0 mb-20">
   <div class="relative px-4">
     <!-- start::Timeline item -->
     <section id="flash">
             <div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -249,7 +269,7 @@
                 </div><div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -261,7 +281,7 @@
             <div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -271,7 +291,7 @@
                 </div><div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -283,7 +303,7 @@
             <div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -293,7 +313,7 @@
                 </div><div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -305,7 +325,7 @@
             <div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -315,7 +335,7 @@
                 </div><div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -325,7 +345,7 @@
                 </div><div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -337,7 +357,7 @@
             <div class="flex items-center w-full relative">
                   <div class="hidden lg:block absolute h-full border border-gray-400 top-32 left-[1px]"></div>
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -349,7 +369,7 @@
             <div class="flex items-center w-full relative">
                   
                   <div class="hidden lg:block w-9 z-9 -translate-x-1/2 self-start mt-32">
-                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full"></div>
+                    <div class="w-10 h-10 bg-gray-400 border-[12px] border-white rounded-full dark:border-[#3A3A3A]"></div>
                   </div>
                   <div class="flex-1 pb-6">
                     <div class="shadow-lg rounded-lg md:rounded-3xl border border-zinc-100 overflow-hidden">
@@ -382,7 +402,7 @@
           
   <div x-data="{completed: false, submitting: false}">
     <div x-show="!completed">
-      <p class="font-bold md:text-2xl text-lg mb-6">Request a demo</p>
+      <p class="font-bold md:text-2xl text-lg mb-6 text-gray-800">Request a demo</p>
       <form action="https://formsubmit.co/bluesky.1289@gmail.com" @submit.prevent="
           submitting = true;
     fetch($el.action,{ method: 'POST', body: new FormData($el)}).then(() => {
