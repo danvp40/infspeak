@@ -51,10 +51,10 @@
 
   <body class="antialiased text-page bg-light dark:text-white tracking-tight dark:bg-dark" x-data="{modal: null, scroll: true}" :class="!scroll ? 'overflow-y-hidden' : null">
     
-  <div class="fixed h-full w-full top-0 left-0 backdrop-blur-sm bg-black/80 z-20 flex items-center justify-center" :class="{hidden: hidden}" x-data="setup( [108,101,116,105,116,115,112,101,97,107])" @scroll.window="$event.preventDefault(); $event.stopPropagation();">
+  <div class="fixed h-full w-full top-0 left-0 backdrop-blur-sm bg-black/80 z-20 flex items-center justify-center" :class="{hidden: hidden}" x-data="setup( [108,101,116,105,116,115,112,101,97,107])">
   <div class="w-96 bg-white rounded-xl drop-shadown-lg px-8 py-12">
     <div class="flex justify-center">
-      <img src="/assets/logo.svg" alt="Infospeaks">
+      <img src="/assets/Logo.svg" alt="Infospeaks">
     </div>
 
     <div class="mt-16 text-gray-800">
@@ -157,18 +157,19 @@
     </div>
   </div>
 
-  <div class="hidden lg:block relative w-[400px] overflow-hidden z-10 shrink-0 astro-U42SK5CC" x-data="{navigation: {&#34;center_label&#34;:&#34;P&#38;L ANALYTICS&#34;,&#34;items&#34;:[{&#34;href&#34;:&#34;#flash&#34;,&#34;label&#34;:&#34;flash&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/flash.png&#34;},{&#34;href&#34;:&#34;#growth&#34;,&#34;label&#34;:&#34;growth&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/growth.png&#34;},{&#34;href&#34;:&#34;#distribution&#34;,&#34;label&#34;:&#34;distribution&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/distribution.png&#34;},{&#34;href&#34;:&#34;#trend&#34;,&#34;label&#34;:&#34;trend&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/trend.png&#34;},{&#34;href&#34;:&#34;#insights&#34;,&#34;label&#34;:&#34;insights&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/insights.png&#34;},{&#34;href&#34;:&#34;#optimal-points&#34;,&#34;label&#34;:&#34;optimal points&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/optimal-points.png&#34;}]}}">
-    <div class="fixed px-5 w-[400px] transition-all overflow-hidden astro-U42SK5CC" :class="{'top-12': !atTop, 'top-28': atTop}" @scrollend.window="atTop = (window.pageYOffset < 50) ? true: false;
-    navigation.items.map(({href: id}) =>{
-      const el = document.querySelector(id);
-      if(el ){
-        const  box = el.getBoundingClientRect()
-        if(box.top < window.innerHeight/2 && box.bottom > 0) {
-          current = id;
-        }
-      }
+  <div class="hidden lg:block relative w-[400px] overflow-hidden z-10 shrink-0 astro-U42SK5CC" x-data="{navigation: {&#34;center_label&#34;:&#34;P&#38;L ANALYTICS&#34;,&#34;items&#34;:[{&#34;href&#34;:&#34;#flash&#34;,&#34;label&#34;:&#34;flash&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/flash.png&#34;},{&#34;href&#34;:&#34;#growth&#34;,&#34;label&#34;:&#34;growth&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/growth.png&#34;},{&#34;href&#34;:&#34;#distribution&#34;,&#34;label&#34;:&#34;distribution&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/distribution.png&#34;},{&#34;href&#34;:&#34;#trend&#34;,&#34;label&#34;:&#34;trend&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/trend.png&#34;},{&#34;href&#34;:&#34;#insights&#34;,&#34;label&#34;:&#34;insights&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/insights.png&#34;},{&#34;href&#34;:&#34;#optimal-points&#34;,&#34;label&#34;:&#34;optimal points&#34;,&#34;image&#34;:&#34;/assets/services/pnl/nav/optimal-points.png&#34;}]}, handleScroll(e){
+    this.atTop = (window.pageYOffset < 50) ? true: false;
+    this.navigation.items.map(({href: id}) =>{
+    const el = document.querySelector(id);
+    if(el ){
+    const  box = el.getBoundingClientRect()
+    if(box.top < window.innerHeight/2 &#38;&#38; box.bottom > 0) {
+    current = id;
+    }
+    }
     })
-    ">
+    } }">
+    <div class="fixed px-5 w-[400px] transition-all overflow-hidden astro-U42SK5CC" :class="{'top-12': !atTop, 'top-28': atTop}" @scrollend.window="handleScroll" @touchstart.document="handleScroll" @touchend.document="handleScroll">
       <div class="relative astro-U42SK5CC" style="transform:translateY(-15%) scale(0.9)">
         <div class="absolute right-0 w-[200px] h-[928px] overflow-hidden astro-U42SK5CC">
           <div class="absolute right-12 w-[928px] h-[928px] border border-zinc-300 border-l-transparent border-t-transparent rounded-full -rotate-45 astro-U42SK5CC">
