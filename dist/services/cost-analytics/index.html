@@ -93,66 +93,72 @@
   <main>
     
   <div class="flex flex-col lg:flex-row">
-    
+    <div x-data="{current: null, atTop: true}" x-init="current = location.hash || '#flash' ; atTop = (window.pageYOffset < 50) ? true: false;" class="astro-U42SK5CC">
   <div class="astro-U42SK5CC">
-    <div class="lg:hidden overflow-x-auto tab-container bg-white dark:bg-dark shadow-lg pt-3 astro-U42SK5CC" :class="{'fixed top-0 z-10': fixed}" x-data="{currentTab: '#flash', fixed: false}" @scroll.window="fixed = window.scrollY >= 66 ? true : false;">
+    <div class="lg:hidden bg-white dark:bg-dark shadow-lg pt-3 motion-safe:scroll-smooth astro-U42SK5CC" :class="{'fixed top-0 z-10 w-full': fixed}" x-data="{fixed: false}" x-init="$watch('current', value => {
+      let el = $el.querySelector('#mobile-' + value.replace('#', ''))
+      console.log([el.offsetLeft, value])
+      if(el){$el.querySelector('.tabs').scrollTo({left: el.offsetLeft, top: 0, behavior: 'smooth'})}
+      } )" @scroll.window="fixed = window.scrollY >= 66 ? true : false;">
       <h3 class="font-bold text-2xl px-4 astro-U42SK5CC">COST ANALYTICS</h3>
-      <div class="inline-flex md:grid grid-cols-6 gap-4 px-4 astro-U42SK5CC">
-        <a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#flash" x-data="{tabName: '#flash'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                    <img src="/assets/services/cost-analytics/nav/flash.png" alt="flash" class="astro-U42SK5CC">
-                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+      <div class="tabs overflow-x-auto tab-container astro-U42SK5CC">
+        <div class="inline-flex md:grid grid-cols-6 gap-4 px-4 astro-U42SK5CC">
+          <a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" id="mobile-flash" href="#flash" x-data="{tabName: '#flash'}" @click="current = tabName" x-bind:class="{'border-b-2': current == tabName }">
+                  <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                    <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                      <img src="/assets/services/cost-analytics/nav/flash.png" alt="flash" class="astro-U42SK5CC">
+                      <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">flash</div>
-              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#change" x-data="{tabName: '#change'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                    <img src="/assets/services/cost-analytics/nav/change.png" alt="change" class="astro-U42SK5CC">
-                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">flash</div>
+                </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" id="mobile-change" href="#change" x-data="{tabName: '#change'}" @click="current = tabName" x-bind:class="{'border-b-2': current == tabName }">
+                  <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                    <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                      <img src="/assets/services/cost-analytics/nav/change.png" alt="change" class="astro-U42SK5CC">
+                      <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">change</div>
-              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#allocation" x-data="{tabName: '#allocation'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                    <img src="/assets/services/cost-analytics/nav/allocation.png" alt="allocation" class="astro-U42SK5CC">
-                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">change</div>
+                </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" id="mobile-allocation" href="#allocation" x-data="{tabName: '#allocation'}" @click="current = tabName" x-bind:class="{'border-b-2': current == tabName }">
+                  <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                    <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                      <img src="/assets/services/cost-analytics/nav/allocation.png" alt="allocation" class="astro-U42SK5CC">
+                      <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">allocation</div>
-              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#value-chain" x-data="{tabName: '#value-chain'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                    <img src="/assets/services/cost-analytics/nav/value-chain.png" alt="Value chain" class="astro-U42SK5CC">
-                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">allocation</div>
+                </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" id="mobile-value-chain" href="#value-chain" x-data="{tabName: '#value-chain'}" @click="current = tabName" x-bind:class="{'border-b-2': current == tabName }">
+                  <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                    <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                      <img src="/assets/services/cost-analytics/nav/value-chain.png" alt="Value chain" class="astro-U42SK5CC">
+                      <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">Value chain</div>
-              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#breakevent-point" x-data="{tabName: '#breakevent-point'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                    <img src="/assets/services/cost-analytics/nav/breakevent-point.png" alt="Breakevent point" class="astro-U42SK5CC">
-                    <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                  <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">Value chain</div>
+                </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" id="mobile-breakevent-point" href="#breakevent-point" x-data="{tabName: '#breakevent-point'}" @click="current = tabName" x-bind:class="{'border-b-2': current == tabName }">
+                  <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                    <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                      <img src="/assets/services/cost-analytics/nav/breakevent-point.png" alt="Breakevent point" class="astro-U42SK5CC">
+                      <div class="arrow w-2 absolute bottom-1/2 right-0 translate-x-full border-b border-primary astro-U42SK5CC"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">Breakevent point</div>
-              </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" href="#experience-curve" x-data="{tabName: '#experience-curve'}" @click="currentTab = tabName" x-bind:class="{'border-b-2': currentTab == tabName }">
-                <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
-                  <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
-                    <img src="/assets/services/cost-analytics/nav/experience-curve.png" alt="experience curve" class="astro-U42SK5CC">
-                    
+                  <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">Breakevent point</div>
+                </a><a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" id="mobile-experience-curve" href="#experience-curve" x-data="{tabName: '#experience-curve'}" @click="current = tabName" x-bind:class="{'border-b-2': current == tabName }">
+                  <div class="circle  border border-t-transparent border-primary rounded-full rotate-45 astro-U42SK5CC">
+                    <div class="content relative -rotate-45 w-12 h-12 p-1 astro-U42SK5CC">
+                      <img src="/assets/services/cost-analytics/nav/experience-curve.png" alt="experience curve" class="astro-U42SK5CC">
+                      
+                    </div>
                   </div>
-                </div>
-                <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">experience curve</div>
-              </a>
+                  <div class="uppercase text-sm text-gray-500 dark:text-white pt-4 text-center astro-U42SK5CC">experience curve</div>
+                </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="hidden lg:block relative w-[400px] overflow-hidden z-10 shrink-0 astro-U42SK5CC" x-data="{navigation: {&#34;center_label&#34;:&#34;COST ANALYTICS&#34;,&#34;items&#34;:[{&#34;href&#34;:&#34;#flash&#34;,&#34;label&#34;:&#34;flash&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/flash.png&#34;},{&#34;href&#34;:&#34;#change&#34;,&#34;label&#34;:&#34;change&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/change.png&#34;},{&#34;href&#34;:&#34;#allocation&#34;,&#34;label&#34;:&#34;allocation&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/allocation.png&#34;},{&#34;href&#34;:&#34;#value-chain&#34;,&#34;label&#34;:&#34;Value chain&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/value-chain.png&#34;},{&#34;href&#34;:&#34;#breakevent-point&#34;,&#34;label&#34;:&#34;Breakevent point&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/breakevent-point.png&#34;},{&#34;href&#34;:&#34;#experience-curve&#34;,&#34;label&#34;:&#34;experience curve&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/experience-curve.png&#34;}]}, current: null, atTop: true}" x-init="current = location.hash; atTop = (window.pageYOffset < 50) ? true: false;">
-    <div class="fixed px-5 w-[400px] transition-all overflow-hidden astro-U42SK5CC" :class="{'top-12': !atTop, 'top-28': atTop}" @scroll.window="atTop = (window.pageYOffset < 50) ? true: false;
+  <div class="hidden lg:block relative w-[400px] overflow-hidden z-10 shrink-0 astro-U42SK5CC" x-data="{navigation: {&#34;center_label&#34;:&#34;COST ANALYTICS&#34;,&#34;items&#34;:[{&#34;href&#34;:&#34;#flash&#34;,&#34;label&#34;:&#34;flash&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/flash.png&#34;},{&#34;href&#34;:&#34;#change&#34;,&#34;label&#34;:&#34;change&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/change.png&#34;},{&#34;href&#34;:&#34;#allocation&#34;,&#34;label&#34;:&#34;allocation&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/allocation.png&#34;},{&#34;href&#34;:&#34;#value-chain&#34;,&#34;label&#34;:&#34;Value chain&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/value-chain.png&#34;},{&#34;href&#34;:&#34;#breakevent-point&#34;,&#34;label&#34;:&#34;Breakevent point&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/breakevent-point.png&#34;},{&#34;href&#34;:&#34;#experience-curve&#34;,&#34;label&#34;:&#34;experience curve&#34;,&#34;image&#34;:&#34;/assets/services/cost-analytics/nav/experience-curve.png&#34;}]}}">
+    <div class="fixed px-5 w-[400px] transition-all overflow-hidden astro-U42SK5CC" :class="{'top-12': !atTop, 'top-28': atTop}" @scrollend.window="atTop = (window.pageYOffset < 50) ? true: false;
     navigation.items.map(({href: id}) =>{
       const el = document.querySelector(id);
       if(el ){
@@ -249,8 +255,7 @@
       </div>
     </div>
   </div>
-
-
+</div>
 
     <div class="pt-9 lg:pt-4 lg:p-8 pl-0 mb-20">
   <div class="relative px-4">
