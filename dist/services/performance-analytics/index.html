@@ -44,8 +44,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,400;0,700;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,400;0,700;1,500&family=Philosopher&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/_astro/privacy.dd3d485e.css" />
-<link rel="stylesheet" href="/_astro/cost-analytics.d0cfcfdc.css" /><script type="module">window.setup=function(r){return{hidden:!1,code:r,error:null,init(){const e=JSON.parse(localStorage.getItem("code")||"[]"),t=localStorage.getItem("time");e&&String.fromCharCode(...e)==String.fromCharCode(...this.code)&&t&&new Date().getTime()-new Date(t).getTime()<108e5?(this.hidden=!0,this.scroll=!0):this.scroll=!1},entertain(e){new FormData(e.target).get("text")==String.fromCharCode(...this.code)?(localStorage.setItem("code",JSON.stringify(this.code)),localStorage.setItem("time",new Date),this.scroll=!0,this.hidden=!0,this.error=null):this.error="password is incorrect"}}};
+  <link rel="stylesheet" href="/_astro/privacy.e7d35cec.css" />
+<link rel="stylesheet" href="/_astro/cost-analytics.d0cfcfdc.css" /><script type="module">window.setup=function(r){return{hidden:!1,code:r,error:null,init(){const e=JSON.parse(localStorage.getItem("code")||"[]"),t=localStorage.getItem("time");e&&String.fromCharCode(...e)==String.fromCharCode(...this.code)&&t&&new Date().getTime()-new Date(t).getTime()<36e5?(this.hidden=!0,this.scroll=!0):this.scroll=!1},entertain(e){new FormData(e.target).get("text")==String.fromCharCode(...this.code)?(localStorage.setItem("code",JSON.stringify(this.code)),localStorage.setItem("time",new Date),this.scroll=!0,this.hidden=!0,this.error=null):this.error="password is incorrect"}}};
 </script>
 <script type="module" src="/_astro/page.0fc6666a.js"></script></head>
 
@@ -53,22 +53,24 @@
     
   <div class="fixed h-full w-full top-0 left-0 backdrop-blur-sm bg-black/80 z-20 flex items-center justify-center" :class="{hidden: hidden}" x-data="setup( [108,101,116,105,116,115,112,101,97,107])">
   <div class="w-96 bg-white rounded-xl drop-shadown-lg px-8 py-12">
-    <div class="flex justify-center">
-      <img src="/assets/Logo.svg" alt="Infospeaks">
+    <div class="flex flex-col items-center">
+      <h3 class="text-[22px] font-bold text-gray-800">Enter password to continue</h3>
+      <p class="mt-2 text-gray-400">
+        Don't have password, please <a href="#" @click.prevent="modal = 'request-demo'" class="text-primary font-bold">contact us</a>
+      </p>
     </div>
 
-    <div class="mt-16 text-gray-800">
+    <div class="mt-8 text-gray-800">
       <form @submit.prevent="entertain($event)">
         <div class="form-group mt-3">
           <input type="password" id="text" name="text" placeholder="password" class="mt-1 w-full rounded-md border border-gray-200 px-3 py-3 disabled:bg-gray-100" required>
           <label class="text-sm text-red-500" :class="{hidden: !error}" x-text="error"></label>
         </div>
 
-        <div class="pt-8">
+        <div class="pt-6">
           <button class="btn-primary w-full rounded-full px-6 py-3 text-center"> Login</button>
-
-          <p class="mt-4">
-            If you don't have password, <a href="#" @click.prevent="modal = 'request-demo'" class="text-primary font-bold">contact us</a>
+          <p class="text-center mt-4">
+            <a href="/" class="underline hover:text-primary inline-flex gap-2 items-center"><svg viewBox="0 0 24 24" class="w-4 h-4" astro-icon="tabler:arrow-left"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon-tabler"><path d="M5 12h14M5 12l6 6M5 12l6-6"/></g></svg> Back to home page</a>
           </p>
         </div>
       </form>
@@ -100,7 +102,7 @@
       console.log([el.offsetLeft, value])
       if(el){$el.querySelector('.tabs').scrollTo({left: el.offsetLeft, top: 0, behavior: 'smooth'})}
       } )" @scroll.window="fixed = window.scrollY >= 66 ? true : false;">
-      <h3 class="font-bold text-2xl px-4 astro-U42SK5CC">SALE ANALYTICS</h3>
+      <h3 class="font-bold text-2xl text-gray-800 px-4 astro-U42SK5CC">SALE ANALYTICS</h3>
       <div class="tabs overflow-x-auto tab-container astro-U42SK5CC">
         <div class="inline-flex md:grid grid-cols-6 gap-4 px-4 astro-U42SK5CC">
           <a class="w-32 flex flex-col items-center py-4 border-primary astro-U42SK5CC" id="mobile-flash" href="#flash" x-data="{tabName: '#flash'}" @click="current = tabName" x-bind:class="{'border-b-2': current == tabName }">
@@ -247,7 +249,7 @@
                     </div>
 
               <!-- center -->
-              <div class="w-36 h-36 absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 border rounded-full border-gray-800 flex items-center justify-center text-center uppercase font-bold text-xl bg-white z-10 astro-U42SK5CC">
+              <div class="w-36 h-36 absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 border rounded-full border-gray-800 flex items-center justify-center text-center uppercase font-bold text-xl text-gray-800 bg-white z-10 astro-U42SK5CC">
                 <span class="astro-U42SK5CC">SALE ANALYTICS</span>
               </div>
             </div>
@@ -432,7 +434,7 @@
         </div>
         <input type="hidden" name="_subject" value="Infospeaks.com new Request demo!">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_cc" value="dungnguyen.ajt@gmail.com">
+        <input type="hidden" name="_cc" value="cs@infospeaks.com">
         <div class="pt-8 flex justify-center">
           <button class="btn-primary rounded-full px-6 py-3 disabled:bg-gray-500 flex gap-2 items-center" :disabled="submitting">
             <span x-text="submitting ? 'Sending' : 'Send now'"></span>
