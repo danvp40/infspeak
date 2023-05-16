@@ -45,7 +45,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,400;0,700;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,400;0,700;1,500&family=Philosopher&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/_astro/privacy.e7d35cec.css" />
-<link rel="stylesheet" href="/_astro/cost-analytics.d0cfcfdc.css" /><script type="module">window.setup=function(r){return{hidden:!1,code:r,error:null,init(){const e=JSON.parse(localStorage.getItem("code")||"[]"),t=localStorage.getItem("time");e&&String.fromCharCode(...e)==String.fromCharCode(...this.code)&&t&&new Date().getTime()-new Date(t).getTime()<36e5?(this.hidden=!0,this.scroll=!0):this.scroll=!1},entertain(e){new FormData(e.target).get("text")==String.fromCharCode(...this.code)?(localStorage.setItem("code",JSON.stringify(this.code)),localStorage.setItem("time",new Date),this.scroll=!0,this.hidden=!0,this.error=null):this.error="password is incorrect"}}};
+<link rel="stylesheet" href="/_astro/cost-analytics.d0cfcfdc.css" /><script type="module">window.setup=function(r){return{hidden:!1,code:r,error:null,init(){const e=JSON.parse(localStorage.getItem("code")||"[]"),t=localStorage.getItem("time");e&&String.fromCharCode(...e)==String.fromCharCode(...this.code)&&t&&new Date().getTime()-new Date(t).getTime()<9e5?(this.hidden=!0,this.scroll=!0):this.scroll=!1},entertain(e){new FormData(e.target).get("text")==String.fromCharCode(...this.code)?(localStorage.setItem("code",JSON.stringify(this.code)),localStorage.setItem("time",new Date),this.scroll=!0,this.hidden=!0,this.error=null):this.error="password is incorrect"}}};
 </script>
 <script type="module" src="/_astro/page.0fc6666a.js"></script></head>
 
@@ -428,9 +428,9 @@
 
         <div class="modal-body">
           
-  <div x-data="{completed: false, submitting: false}">
+  <div x-data="{completed: false, submitting: false}" class="text-gray-800">
     <div x-show="!completed">
-      <p class="font-bold md:text-2xl text-lg mb-6 text-gray-800">Request a demo</p>
+      <p class="font-bold md:text-2xl text-lg mb-6">Request a demo</p>
       <form action="https://formsubmit.co/bluesky.1289@gmail.com" @submit.prevent="
           submitting = true;
     fetch($el.action,{ method: 'POST', body: new FormData($el)}).then(() => {
